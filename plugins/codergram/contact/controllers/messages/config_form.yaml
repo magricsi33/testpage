@@ -1,0 +1,10 @@
+name: Messages
+form: $/codergram/contact/models/message/fields.yaml
+modelClass: Codergram\Contact\Models\Message
+defaultRedirect: codergram/contact/messages
+create:
+    redirect: 'codergram/contact/messages/update/:id'
+    redirectClose: codergram/contact/messages
+update:
+    redirect: codergram/contact/messages
+    redirectClose: codergram/contact/messages

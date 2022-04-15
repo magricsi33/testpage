@@ -1,0 +1,42 @@
+:root {
+	--primary: #37d145;
+	--bg: #242d36;
+  --bg2: #2c3843;
+	--content: #fff;
+}
+
+* {
+  color: #fff;
+}
+
+*:focus {
+  box-shadow: none !important;
+}
+
+body {
+  background: var(--bg) !important;
+}
+
+nav {
+  background: var(--bg2);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: var(--primary) !important;
+}
+
+.btn-primary {
+  background: var(--primary) !important;
+  border: 0 !important;
+}
+
+input,
+textarea {
+  background: var(--bg2) !important;
+  border: 0 !important;
+  color: #fff !important;
+}

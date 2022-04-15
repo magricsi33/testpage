@@ -1,0 +1,64 @@
+title = "Kapcsolat"
+url = "/kapcsolat"
+layout = "default"
+==
+<?php
+use Codergram\Contact\Models\Message;
+
+function onCreateMsg() {
+
+    if (Input::get('name') & Input::get('email') & Input::get('comment')) {
+        $regex = "/^([a-zA-Z0-9\.]+@+[a-zA-Z]+(\.)+[a-zA-Z]{2,3})$/";
+
+        if (preg_match($regex, Input::get('email')) ) {
+            $emailValid = true;
+        } else {
+            $emailValid = false;
+        }
+
+        if ($emailValid) {
+            $msg = new Message();
+            $msg->name = Input::get('name');
+            $msg->email = Input::get('email');
+            $msg->comment = Input::get('comment');
+            
+            if ($msg->save()) {
+                Flash::success("Köszönjük szépen a kérdésedet. Válaszunkkal hamarosan keresünk a megadott e-mail címen.");
+            } else {
+                Flash::error("Valami hiba törént a létrehozás közben, kérjük próbáld újra!");
+            }
+        } else {
+            Flash::error("Érvénytelen e-mail cím!");
+        }
+    } else {
+        Flash::error("Hiba! Kérjük töltsd ki az összes mezőt!");
+    }
+
+}
+?>
+==
+<div class="container">
+    <h1 class="mb-4">
+        Kapcsolat
+    </h1>
+
+    <form data-request="onCreateMsg" data-request-flash data-request-loading method="POST" action="#">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="name" id="name" placeholder="Név" required>
+            <label for="name">Név</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="email" id="email" placeholder="E-mail cím" required>
+            <label for="email">E-mail cím</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="comment" style="height: 100px;" placeholder="Üzenet" id="comment" required></textarea>
+            <label for="comment">Üzenet</label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Küldés
+        </button>
+
+    </form>
+
+</div>
