@@ -74,11 +74,6 @@ tabs:
             tab: 'rainlab.user::lang.user.account'
             context: preview
             type: text
-        billing_address:
-            label: billing_address
-            span: auto
-            type: text
-            tab: Adatok
 secondaryTabs:
     fields:
         avatar:

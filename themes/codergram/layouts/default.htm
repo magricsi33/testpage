@@ -71,5 +71,54 @@ function onStart()
     <script src="{{ 'assets/javascript/app.js'|theme }}"></script>
     {% framework extras %}
     {% scripts %}
+    <script>
+        $(window).on('ajaxErrorMessage', function (event, message) {
+            event.preventDefault();
+    
+            translated = "";
+
+            if (message == "A user was not found with the given credentials.") {
+                translated = "Sajnáljuk, rossz jelszót, vagy e-mail címet adtál meg. Próbáld meg újra!";
+            } else if (message == "Invalid activation code supplied.") {
+                translated = "A megadott aktiválási kód érvénytelen.";
+            } else if (message == "The password you entered was invalid.") {
+                translated = "A megadott jelszó érvénytelen.";
+            } else if (message == "Successfully activated your account.") {
+                translated = "A fiók aktiválása sikerült.";
+            } else if (message == "Successfully deactivated your account. Sorry to see you go!") {
+                translated = "Sikeresen felfüggesztette a fiókját. További szép napot kívánunk!";
+            } else if (message == "Settings successfully saved!") {
+                translated = "Sikerült menteni a beállításokat!";
+            } else if (message == "You must be logged in first!") {
+                translated = "Előbb be kell jelentkeznie!";
+            } else if (message == "Your account is already activated!") {
+                translated = "Már aktiválta a fiókját!";
+            } else if (message == "An activation email has been sent to your email address.") {
+                translated = "Az aktiválási e-mail elküldése sikeresen megtörtént.";
+            } else if (message == "Registrations are currently disabled.") {
+                translated = "A regisztráció jelenleg tiltva van az oldalon.";
+            } else if (message.includes("as they are not activated.")) {
+                translated = "Ezt a felhasználót még nem aktiválták!";
+            } else if (message == 'The email has already been taken.') {
+                translated = "Sajnáljuk, de ezzel az email címmel már regisztráltak.";
+            } else if(message.includes('The password must be between')) {
+                translated = "A jelszó legalább 8 karakter hosszú kell legyen.";
+            } else if(message == 'A user was found to match all plain text credentials however hashed credential "password" did not match.') {
+                translated = "A jelszó helytelen!";
+            } else if (message.includes("A(z) password megerősítés nem egyezik.")) {
+                translated = "A két jelszó nem egyezik!";
+            }
+
+            if(!translated) {
+                return;
+            }
+    
+            $.wn.flashMsg({
+                interval: 3,
+                text: translated,
+                class: 'error'
+            })
+        })
+    </script>
 </body>
 </html>

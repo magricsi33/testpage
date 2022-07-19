@@ -21,7 +21,7 @@ function onSignIn() {
         return $this->account->onSignin();
     } catch (AuthException $ex) {
     	if(strpos($ex->getMessage(),"Cannot login user") !== false){
-			Flash::error('Az ön fiókja nincs aktiválva');			
+			Flash::error('Az Ön fiókja nincs aktiválva');			
 			return;
 		}
 
@@ -36,7 +36,7 @@ function onSignIn() {
 		}
 
 		if(strpos($ex->getMessage(),'has been suspended.') !== false){
-			Flash::error("Az ön felhasználója fel lett függesztve!");
+			Flash::error("Az Ön felhasználója fel lett függesztve!");
 			return;
 		} 
 
