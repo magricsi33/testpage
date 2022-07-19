@@ -412,15 +412,37 @@ class Account extends ComponentBase
 
         $data = post();
 
-        if ($this->updateRequiresPassword()) {
-            if (!$user->checkHashValue('password', $data['password_current'])) {
-                throw new ValidationException(['password_current' => Lang::get('rainlab.user::lang.account.invalid_current_pass')]);
-            }
+        
+        if (!$user->checkHashValue('password', $data['password_current'])) {
+            throw new ValidationException(['password_current' => Lang::get('rainlab.user::lang.account.invalid_current_pass')]);
         }
+        
 
         if (Input::hasFile('avatar')) {
             $user->avatar = Input::file('avatar');
         }
+
+        $user->billing_name = Input::get('billing_name');
+        $user->billing_email = Input::get('billing_email');
+        $user->billing_phone = Input::get('billing_phone');
+        $user->billing_zip = Input::get('billing_zip');
+        $user->billing_city = Input::get('billing_city');
+        $user->billing_address = Input::get('billing_address');
+        $user->billing_address_type = Input::get('billing_address_type');
+        $user->billing_house_number = Input::get('billing_house_number');
+        $user->billing_floor = Input::get('billing_floor');
+        $user->billing_door = Input::get('billing_door');
+        $user->billing_company_number = Input::get('billing_company_number');
+        $user->trans_name = Input::get('trans_name');
+        $user->trans_email = Input::get('trans_email');
+        $user->trans_phone = Input::get('trans_phone');
+        $user->trans_zip = Input::get('trans_zip');
+        $user->trans_city = Input::get('trans_city');
+        $user->trans_address = Input::get('trans_address');
+        $user->trans_address_type = Input::get('trans_address_type');
+        $user->trans_house_number = Input::get('trans_house_number');
+        $user->trans_floor = Input::get('trans_floor');
+        $user->trans_door = Input::get('trans_door');
 
         $user->fill($data);
         $user->save();
@@ -437,9 +459,96 @@ class Account extends ComponentBase
         /*
          * Redirect
          */
-        if ($redirect = $this->makeRedirection()) {
-            return $redirect;
+
+        if ($user->save()) {    
+            return Redirect::to("/profil");
+            
+        } else {
+            Flash::error("Valami hiba törént, kérjük próbáld újra!");
+        }   
+
+        $this->prepareVars();
+    }
+
+    /**
+     * Update the user billing data
+     */
+    public function onUpdateBillingData()
+    {
+        if (!$user = $this->user()) {
+            return;
         }
+
+        $data = post();
+
+        $user->billing_name = Input::get('billing_name');
+        $user->billing_email = Input::get('billing_email');
+        $user->billing_phone = Input::get('billing_phone');
+        $user->billing_zip = Input::get('billing_zip');
+        $user->billing_city = Input::get('billing_city');
+        $user->billing_address = Input::get('billing_address');
+        $user->billing_address_type = Input::get('billing_address_type');
+        $user->billing_house_number = Input::get('billing_house_number');
+        $user->billing_floor = Input::get('billing_floor');
+        $user->billing_door = Input::get('billing_door');
+        $user->billing_company_number = Input::get('billing_company_number');
+
+        $user->fill($data);
+        $user->save();
+
+        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
+
+        /*
+         * Redirect
+         */
+
+        if ($user->save()) {    
+            return Redirect::to("/profil");
+            
+        } else {
+            Flash::error("Valami hiba törént, kérjük próbáld újra!");
+        }   
+
+        $this->prepareVars();
+    }
+
+    /**
+     * Update the user
+     */
+    public function onUpdateTransData()
+    {
+        if (!$user = $this->user()) {
+            return;
+        }
+
+        $data = post();
+        
+        $user->trans_name = Input::get('trans_name');
+        $user->trans_email = Input::get('trans_email');
+        $user->trans_phone = Input::get('trans_phone');
+        $user->trans_zip = Input::get('trans_zip');
+        $user->trans_city = Input::get('trans_city');
+        $user->trans_address = Input::get('trans_address');
+        $user->trans_address_type = Input::get('trans_address_type');
+        $user->trans_house_number = Input::get('trans_house_number');
+        $user->trans_floor = Input::get('trans_floor');
+        $user->trans_door = Input::get('trans_door');
+
+        $user->fill($data);
+        $user->save();
+
+        Flash::success(post('flash', Lang::get(/*Settings successfully saved!*/'rainlab.user::lang.account.success_saved')));
+
+        /*
+         * Redirect
+         */
+
+        if ($user->save()) {    
+            return Redirect::to("/profil");
+            
+        } else {
+            Flash::error("Valami hiba törént, kérjük próbáld újra!");
+        }   
 
         $this->prepareVars();
     }

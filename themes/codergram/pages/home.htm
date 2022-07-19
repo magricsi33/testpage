@@ -32,6 +32,70 @@ function onStart() {
         $this['notiOlds'] = $notifications->where('saw', 1);
     
         //dd($notifications);
+
+        $profilStatus = 0;
+
+        if ($user->billing_name) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_email) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_phone) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_zip) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_city) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_address) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_address_type) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_house_number) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_floor) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_door) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_company_number) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_name) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_zip) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_city) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_address) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_address_type) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_house_number) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_floor) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_door) {
+            $profilStatus += 1;
+        }
+
+        $profilPercentage = ($profilStatus / 19) * 100;
+        $this['profilPercentage'] = $profilPercentage;
+
     }
 }
 
@@ -67,7 +131,6 @@ function onSawNoti() {
         <div class="col-lg-2"></div>
         <div class="col-lg-5">
             <h2 class="h3 mb-4">Hírfolyam</h2>
-
             <!-- Post box -->
             {% for post in posts %}
             <div class="card card-boy p-0 text-white">
@@ -109,24 +172,46 @@ function onSawNoti() {
 
             <h6 class="h6 mb-4">Új értesítés</h6>
 
-            {% if notiNews|length > 0 %}
-            {% for notification in notiNews %}
+            {% if profilPercentage != 100 %}
             <div class="card card-boy p-0 text-white">
-                <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
-                <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
+                <div class="d-flex flex-wrap justify-content-between align-items-center px-4 pt-4">
+                    <div>
+                        <p class="fw-bold m-0">Profil állapota</p>
+                        <p class="text-secondary m-0">Rendszerüzenet</p>
+                    </div>
+                    <div class="profileStatus">
+                        {{ profilPercentage|number_format(1, '.', ',') }}%
+                    </div>
+                </div>
                 <div class="px-4 py-3">
-                    {{ notification.description|raw }}
+                    Töltsd ki a profilodhoz tartozó számlázási és szállítási adatokat.
                 </div>
                 <div class="px-4 pb-4">
-                    <form data-request="onSawNoti" data-request-flash>
-                        <input type="text" name="noti_id" value="{{ notification.id }}" hidden>
-                        <button class="btn btn-primary fw-bold" type="submit">
-                            <i class="fa-solid fa-circle-check me-2"></i> Olvasottra állít
-                        </button>
-                    </form>
+                    <a href="{{ 'profil'|page }}" class="btn btn-primary fw-bold">
+                        <i class="fa-solid fa-circle-user me-2"></i> Profil kitöltése
+                    </a>
                 </div>
             </div>
-            {% endfor %}
+            {% endif %}
+
+            {% if notiNews|length > 0 %}
+                {% for notification in notiNews %}
+                <div class="card card-boy p-0 text-white">
+                    <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
+                    <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
+                    <div class="px-4 py-3">
+                        {{ notification.description|raw }}
+                    </div>
+                    <div class="px-4 pb-4">
+                        <form data-request="onSawNoti" data-request-flash>
+                            <input type="text" name="noti_id" value="{{ notification.id }}" hidden>
+                            <button class="btn btn-primary fw-bold" type="submit">
+                                <i class="fa-solid fa-circle-check me-2"></i> Olvasottra állít
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
             {% else %}
                 <p class="text-secondary"><i class="fa-solid fa-circle-check me-2 prim"></i> Nincs új értesítés</p>
             {% endif %}

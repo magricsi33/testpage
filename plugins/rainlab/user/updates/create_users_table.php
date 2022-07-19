@@ -23,6 +23,27 @@ class CreateUsersTable extends Migration
             $table->timestamp('activated_at')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
+            $table->string('billing_name')->nullable();
+            $table->string('billing_email')->nullable();
+            $table->string('billing_phone')->nullable();
+            $table->string('billing_zip')->nullable();
+            $table->string('billing_city')->nullable();
+            $table->string('billing_address')->nullable();
+            $table->string('billing_address_type')->nullable();
+            $table->string('billing_house_number')->nullable();
+            $table->string('billing_floor')->nullable();
+            $table->string('billing_door')->nullable();
+            $table->string('billing_company_number')->nullable();
+            $table->string('trans_name')->nullable();
+            $table->string('trans_email')->nullable();
+            $table->string('trans_phone')->nullable();
+            $table->string('trans_zip')->nullable();
+            $table->string('trans_city')->nullable();
+            $table->string('trans_address')->nullable();
+            $table->string('trans_address_type')->nullable();
+            $table->string('trans_house_number')->nullable();
+            $table->string('trans_floor')->nullable();
+            $table->string('trans_door')->nullable();
         });
     }
 

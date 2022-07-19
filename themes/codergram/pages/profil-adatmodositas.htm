@@ -1,0 +1,60 @@
+title = "Profil"
+url = "/profil/alapadat-modositas"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "belepes"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+==
+<div class="container">
+  <div class="col-lg-6 mx-auto">
+    <form data-request="onUpdate" data-request-flash>
+      <h2 class="h3 mb-4">Alapadatok</h2>
+      <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control text-white" id="email" placeholder="E-mail cím" value="{{ user.email }}" required readonly>
+        <label for="email" class="text-secondary">E-mail cím <small class="text-danger">* kötelező</small></label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" name="name" class="form-control text-white" id="name" placeholder="Teljes név" value="{{ user.name }}" required>
+        <label for="name" class="text-secondary">Teljes név <small class="text-danger">* kötelező</small></label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="password" name="password" class="form-control text-white" id="password" placeholder="Új jelszó">
+        <label for="password" class="text-secondary">Új jelszó</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="password" name="password_confirmation" class="form-control text-white" id="password_confirmation" placeholder="Új jelszó megerősítése">
+        <label for="password_confirmation" class="text-secondary">Új jelszó megerősítése</label>
+      </div>
+
+
+
+          <p class="text-secondary">
+            Ezen adatok módosításához kérjük, erősítse meg jelenlegi jelszavát.
+          </p>
+          <div class="form-floating mb-3">
+            <input type="password" name="password_current" class="form-control text-white" id="password_current" placeholder="Jelenlegi jelszó">
+            <label for="password_current" class="text-secondary">Jelenlegi jelszó</label>
+          </div>
+
+
+      <button type="submit" class="btn btn-primary fw-bold">Módosítás</button>
+
+    </form>
+
+
+
+
+
+
+  </div>
+</div>

@@ -1,0 +1,103 @@
+title = "Profil"
+url = "/profil/szallitas-modositas"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "belepes"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+==
+<div class="container">
+  <div class="col-lg-6 mx-auto">
+    <form data-request="onUpdateTransData" data-request-flash>
+
+      <h2 class="h3 mb-4">Szállítási adatok</h2>
+
+      <div class="row">
+        <div class="col-12 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_name" class="form-control text-white" id="trans_name" 
+            placeholder="Teljes név" value="{{ user.trans_name }}">
+            <label for="trans_name" class="text-secondary">Szállítási név</label>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_zip" class="form-control text-white" id="trans_zip" 
+            placeholder="Irányítószám" value="{{ user.trans_zip }}">
+            <label for="trans_zip" class="text-secondary">Irányítószám</label>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_city" class="form-control text-white" id="trans_city" 
+            placeholder="Város" value="{{ user.trans_city }}">
+            <label for="trans_city" class="text-secondary">Város</label>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_address" class="form-control text-white" id="trans_address" 
+            placeholder="Cím" value="{{ user.trans_address }}">
+            <label for="trans_address" class="text-secondary">Cím</label>
+          </div>
+        </div>
+        <div class="col-lg-5 mb-3">
+          <div class="form-floating">
+            <select name="trans_address_type" id="trans_address_type" class="form-control text-white">
+              <option value="" selected disabled>Közterület jellege</option>
+              <optgroup label="Válasz:">
+                  <option {{ user.trans_address_type == 'tér' ? "selected" : "" }} value="tér">tér</option>
+                  <option {{ user.trans_address_type == 'út' ? "selected" : "" }} value="út">út</option>
+                  <option {{ user.trans_address_type == 'utca' ? "selected" : "" }} value="utca">utca</option>
+                  <option {{ user.trans_address_type == 'köz' ? "selected" : "" }} value="köz">köz</option>
+                  <option {{ user.trans_address_type == 'sugárút' ? "selected" : "" }} value="sugárút">sugárút</option>
+                  <option {{ address.address_type == 'körút' ? "selected" : "" }} value="körút">körút</option>
+                  <option {{ user.trans_address_type == 'helyrajzi szám' ? "selected" : "" }} value="helyrajzi szám">helyrajzi szám</option>
+                  <option {{ user.trans_address_type == 'tanya' ? "selected" : "" }} value="tanya">tanya</option>
+                  <option {{ user.trans_address_type == 'lakótelep' ? "selected" : "" }} value="lakótelep">lakótelep</option>
+              </optgroup>
+
+            </select>
+            <label for="trans_address_type" class="text-secondary">Közterület jellege</label>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_house_number" class="form-control text-white" id="trans_house_number" 
+            placeholder="Házszám" value="{{ user.trans_house_number }}">
+            <label for="trans_house_number" class="text-secondary">Házszám</label>
+          </div>
+        </div>
+        <div class="col-lg-2 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_floor" class="form-control text-white" id="trans_floor" 
+            placeholder="Emelet" value="{{ user.trans_floor }}">
+            <label for="trans_floor" class="text-secondary">Emelet</label>
+          </div>
+        </div>
+        <div class="col-lg-2 mb-3">
+          <div class="form-floating">
+            <input type="text" name="trans_door" class="form-control text-white" id="trans_door" 
+            placeholder="Ajtó" value="{{ user.trans_door }}">
+            <label for="trans_door" class="text-secondary">Ajtó</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary fw-bold">Módosítás</button>
+
+    </form>
+
+
+
+
+
+
+  </div>
+</div>

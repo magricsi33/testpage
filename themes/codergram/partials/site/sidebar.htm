@@ -9,7 +9,7 @@
 </div>
 <div class="sidebar-menu">
 	<ul class="menu">		
-		<li class="sidebar-item active">
+		<li class="sidebar-item {{ this.page.title == 'Főoldal' ? 'active' }}">
 			<a href="/" class='sidebar-link'>
 				<i class="fa-light fa-house"></i>
 				<span>Hírfolyam</span>
@@ -19,7 +19,7 @@
 		<div class="dropdown mt-2 sidebar-item">
 			<button class="btn dropdown-toggle sidebar-link w-100 justify-content-between" type="button" id="products" data-bs-toggle="dropdown" aria-expanded="false">
 				<p class="m-0">
-					<i class="fa-light fa-house"></i>
+					<i class="fa-light fa-box"></i>
 					<span>Termékek</span>
 				</p>
 			</button>
@@ -33,5 +33,12 @@
 				{% endfor %}
 			</ul>
 		</div>
+
+		<li class="sidebar-item {{ this.page.title == 'Profil' ? 'active' }}">
+			<a href="{{ 'profil'|page }}" class='sidebar-link'>
+				<i class="fa-light fa-user"></i>
+				<span>Profil</span>
+			</a>
+		</li>
 	</ul>
 </div>

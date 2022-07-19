@@ -129,25 +129,14 @@ function onSendOffer()
         <div class="row">
             <div class="col-lg-6">
                 <div class="d-flex flex-column flex-md-row">
-                    {% if image.gallery|length > 0 %}
                     <div class="d-flex flex-column prod-images-list mr-3">
                         <div class="mb-3">
-                            <img src="{{ product.image.path }}" class="active" alt="{{ product.image.description }}" title="{{ product.image.title }}" />
+                            <img src="{{ product.image.path }}" 
+                            height="500"
+                            class="active" 
+                            alt="{{ product.image.description }}" title="{{ product.image.title }}" />
                         </div>
-                        {% for img in product.gallery %}
-                        <div class="mb-3">
-                            <img src="{{ img.path }}" class="img-fluid" alt="{{ product.image.description }}" title="{{ product.image.title }}" />
-                        </div>
-                        {% endfor %}
                     </div>
-                    {% endif %}
-                    <div class="flex-grow-1 mb-3 mb-md-0 text-center">
-                        <img src="{{ product.image.path }}" id="thumbImg"
-                            class="img-fluid" alt="{{ product.image.description }}" title="{{ product.image.title }}" />
-                    </div>
-                </div>
-                <div class="d-none d-lg-block">
-                    {% partial 'product/review' %}
                 </div>
             </div>
             <div class="col-lg-6">
@@ -205,15 +194,28 @@ function onSendOffer()
                         </div>
                     </div>
                 </form>
-                <p class="fw-bold prop-title mt-8 text-secondary">Leírás</p>
-                <div class="desc text-secondary">{{ product.description|raw }}</div>
-                <div class="d-block d-lg-none">
-                    {% partial 'product/review' %}
+                <p class="fw-bold prop-title text-secondary mb-1 mt-4">Tulajdonság</p>
+                <div class="d-flex flex-row justify-content-between align-items-center card card-body">
+                    <p class="m-0 text-secondary">Mértékegység:</p>
+                    <p class="m-0 text-secondary">{{ product.unit.name }}</p>
                 </div>
+                {% if product.description %}
+                <p class="fw-bold prop-title text-secondary mt-3 mb-1">Leírás</p>
+                <div class="desc text-secondary card card-body">
+                    {{ product.description|raw }}
+                </div>
+                {% endif %}
                 {# <div class="mt-5">
                     <p class="fw-bold text-dark prop-title text-secondary">Technikai paraméterek</p>
                     <div class="mt-4 properties text-secondary">{{ product.properties|raw }}</div>
                 </div> #}
+            </div>
+            <div class="col-12 d-flex flex-wrap">
+                {% for img in product.gallery %}
+                <div class="mb-3 me-3">
+                    <img src="{{ img.path }}" width="200" height="200" class="of-contain" alt="{{ product.image.description }}" title="{{ product.image.title }}" />
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
