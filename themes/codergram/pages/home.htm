@@ -132,7 +132,7 @@ function onSawNoti() {
         <div class="col-lg-5">
             <h2 class="h3 mb-4">Hírfolyam</h2>
             <!-- Post box -->
-            {% for post in posts %}
+            {% for post in posts if "now"|date('Y. m. d. H:i', 'Europe/Budapest') > post.published_at|date("Y. m. d. H:i") %}
             <div class="card card-boy p-0 text-white">
                 <p class="fw-bold m-0 px-4 pt-4">{{ post.title }}</p>
                 <p class="text-secondary m-0 px-4">{{ post.published_at|date("Y. m. d.") }}</p>
@@ -195,7 +195,7 @@ function onSawNoti() {
             {% endif %}
 
             {% if notiNews|length > 0 %}
-                {% for notification in notiNews %}
+                {% for notification in notiNews|sort((a, b) => b.created_at <=> a.created_at) %}
                 <div class="card card-boy p-0 text-white">
                     <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
                     <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
@@ -226,7 +226,7 @@ function onSawNoti() {
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="pt-4">
-                            {% for notification in notiOlds %}
+                            {% for notification in notiOlds|sort((a, b) => b.created_at <=> a.created_at) %}
                             <div class="card card-boy p-0 text-white mb-3">
                                 <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
                                 <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
