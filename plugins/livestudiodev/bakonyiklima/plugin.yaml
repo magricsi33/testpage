@@ -1,0 +1,11 @@
+plugin:
+    name: 'livestudiodev.bakonyiklima::lang.plugin.name'
+    description: 'livestudiodev.bakonyiklima::lang.plugin.description'
+    author: LivestudioDev
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Árajánlatok
+        url: livestudiodev/bakonyiklima/offers
+        icon: icon-dollar

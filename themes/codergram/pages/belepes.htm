@@ -1,0 +1,87 @@
+title = "Belépés"
+url = "/belepes"
+layout = "full"
+is_hidden = 0
+
+[account]
+redirect = "home"
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "guest"
+redirect = "home"
+==
+<?php
+use October\Rain\Auth\AuthException;
+
+function onSignIn() {
+	try {
+        return $this->account->onSignin();
+    } catch (AuthException $ex) {
+    	if(strpos($ex->getMessage(),"Cannot login user") !== false){
+			Flash::error('Az ön fiókja nincs aktiválva');			
+			return;
+		}
+
+		if(strpos($ex->getMessage(),"A user was not found with the given credentials") !== false){
+			Flash::error('Ezekkel az adatokkal nem találtunk felhasználót a rendszerben.');			
+			return;
+		}
+
+		if(strpos($ex->getMessage(),'A user was found to match all plain text credentials however hashed credential') !== false){
+			Flash::error("Helytelen jelszó!");
+			return;
+		}
+
+		if(strpos($ex->getMessage(),'has been suspended.') !== false){
+			Flash::error("Az ön felhasználója fel lett függesztve!");
+			return;
+		} 
+
+		Flash::error($ex->getMessage());
+		return;
+	}
+	
+}
+?>
+==
+<div class="d-flex">
+	<div class="col-xxl-5 col-lg-8 col-12 d-flex justify-content-center align-items-center vh-100 bg-white p-0 m-0">
+		<div class="col-xxl-2"></div>
+		<div class="card card-body px-5 bg-white col-xxl-8 ">
+			<form data-request="onSignIn" data-request-flash>
+				
+				<h1 class="prim h1 mb-3"><i class="fa-light fa-user me-2"></i> Belépés</h1>
+				<p class="text-secondary mb-5">
+					Belépésre csak azok a felhasználók jogosúltak, akiknek regisztációját kollégánk elfogadta és felhasználóját aktiválta.
+				</p>
+				<div class="form-floating mb-3 mt-5">
+					<input type="email" name="email" class="form-control bg-white login-input text-dark" id="email" placeholder="E-mail cím" required>
+					<label for="email" class="text-secondary">E-mail cím</label>
+				</div>
+	
+				<div class="form-floating mb-3">
+					<input type="password" name="password" class="form-control bg-white login-input text-dark" id="password" placeholder="Jelszó" required>
+					<label for="password" class="text-secondary">Jelszó</label>
+				</div>
+	
+				<p class="text-secondary my-4">
+					Ha nincs még fiókja, <a href="{{ 'sign-up'|page }}" class="prim">ide kattintva</a> regisztrálhat!
+				</p>
+	
+				<button type="submit" class="btn btn-primary fw-bold">Belépés</button>
+			</form>
+		</div>
+		<div class="col-xxl-2"></div>
+	</div>
+	<div class="col-xxl-7 col-lg-4 d-none p-0 m-0 d-lg-flex justify-content-center align-items-center">
+		<div class="text-center">
+			<i class="fa-duotone fa-cake-candles fa-2xl prim h1"></i>
+			<p class="mb-4 prim h3 fw-bold">Novák Cukrászda</p>
+		</div>
+		
+	</div>
+</div>
+

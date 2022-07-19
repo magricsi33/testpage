@@ -1,0 +1,7 @@
+columns:
+    id:
+        label: 'livestudiodev.lssubs::lang.theme.list.id'
+        type: number
+    name:
+        label: 'livestudiodev.lssubs::lang.theme.list.name'
+        type: text

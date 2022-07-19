@@ -1,0 +1,8 @@
+allvariants:
+    label: Termék változat
+    view:
+        list: $/livestudiodev/lscart/models/productvariant/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/livestudiodev/lscart/models/productvariant/fields.yaml
+        recordsPerPage: 10

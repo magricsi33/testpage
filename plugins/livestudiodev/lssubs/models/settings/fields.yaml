@@ -1,0 +1,22 @@
+fields:
+    checktext:
+        label: 'livestudiodev.lssubs::lang.plugin.settings.label.gdpr'
+        span: full
+        cssClass: 'gdpr-lead'
+        type: text
+    disclaimer:
+        span: full
+        readOnly: 1
+        path: $/livestudiodev/lssubs/partials/_disclaimer.htm
+        type: partial
+    blogpost:
+        label: 'livestudiodev.lssubs::lang.plugin.settings.label.blogposts'
+        showSearch: true
+        span: full
+        type: dropdown
+    content:
+        label: 'livestudiodev.lssubs::lang.plugin.settings.label.textform'
+        size: giant
+        mode: split
+        span: full
+        type: markdown

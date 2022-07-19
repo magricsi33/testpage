@@ -1,0 +1,47 @@
+fields:
+    name:
+        label: 'Kategória neve'
+        span: auto
+        type: text
+    active:
+        label: 'Aktív kategória'
+        span: auto
+        type: switch
+    description:
+        label: 'Kategória leírása'
+        size: huge
+        mode: split
+        span: full
+        type: markdown
+    section1:
+        label: 'Meta információk'
+        span: full
+        type: section
+    meta_title:
+        label: 'Meta cím'
+        span: auto
+        type: text
+    meta_keywords:
+        label: 'Meta keresőszavak'
+        span: auto
+        type: text
+    meta_description:
+        label: 'Meta leírás'
+        size: ''
+        span: full
+        type: textarea
+    image:
+        label: 'Kategória képe'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+        commentAbove: '(opcionális, ha nincs megadva, az első termék képét használjuk)'
+    slug:
+        label: 'Keresőbarát név'
+        span: auto
+        type: text
+        comment: 'Hagyja üresen az automatikus generáláshoz'

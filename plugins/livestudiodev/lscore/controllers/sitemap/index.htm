@@ -1,0 +1,45 @@
+<?php $map = $vars['sitemap'] ?>
+
+<?= $this->makePartial('loader') ?>
+
+<h2>
+    Új sitemap generálása a beállítások alapján
+    <button class="btn btn-success" data-request-loading=".loader" data-request-success="location.reload()" data-request="onGenerateSitemap">Generál</button>
+</h2>
+
+<?php if($map) { ?>
+<h5>
+    Jelenlegi sitemap megtekintése: <a target="_blank" href="<?= \Url::to('/ls/sitemap.xml') ?>">ITT</a>
+</h5>
+
+<hr>
+<h1>Sitemap álltal felvett oldalak</h1>
+<small>Dátum: <b><?= $map->created_at->format("Y. F d. H:i:s") ?> [<?= $map->created_at->diffForHumans() ?>]</b></small> <br>
+<small>Fájlnév: <b>'<?= $map->filename ?>'</b></small>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">URL</th>
+            <th scope="col">Utolsó módosítás dátuma</th>
+            <th scope="col">Változási frekvencia</th>
+            <th scope="col">Prioritás</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($vars["sitemap"]->tags as $key => $tag) { ?>
+        <tr>
+            <th scope="row"><?= $key ?></th>
+            <td><?= $tag["url"] ?></td>
+            <td><?= \Carbon\Carbon::createFromTimestamp($tag["lastModificationDate"])->format("Y-m-d H:i:s") ?></td>
+            <td>
+                <?= $tag['changeFrequency'] ?>
+            </td>
+            <td>
+                <?= $tag['priority'] ?>
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php } else { echo "<h3>Nincs egy sitemap se generálva jelenleg.</h3>"; } ?>

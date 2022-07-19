@@ -1,0 +1,7 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table livestudiodev_lscore_sitemaps'
+    - builder_table_create_livestudiodev_lscore_sitemaps.php
+1.0.3:
+    - 'Sitemapok generálása, sitemapok beállításai, fixek és külön oldalak hozzáadása. Emellett provider / facade bootOnLaunch.'

@@ -1,0 +1,64 @@
+==
+<div class="cookiealert text-center" style="
+display: none;
+position: fixed;
+background-color: rgba(255,255,255, .9);
+box-shadow: 0 3px 5px #333;
+color: #333;
+font-family: Sansita, sans-serif;
+font-weight: 500;
+bottom: 15px;
+left: 50%;
+transform: translateX(-50%);
+-webkit-transform: translateX(-50%);
+-moz-transform: translateX(-50%);
+padding: 5px 20px;
+z-index: 10000;
+align-items: center;
+border-radius: 5px;">
+  <p class="mb-0" style="display: inline-block; flex-grow: 1; line-height: 20px;">
+    A weboldal használatával elfogadod a mi <br /><a href="{{ 'cookies'|page }}">cookie kezelésünket!</a>
+  </p>
+  <button onclick="acceptCookies()"
+    style="color: #333; border: 0; background-color: transparent; width: 5%; display: inline-block; font-weight: bold; margin-left: 15px; outline: unset; box-shadow: unset;">
+    X
+  </button>
+</div>
+{% put scripts %}
+<script>
+  function acceptCookies() {
+    var exdays = 90;
+    var d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = "accepted=true;" + expires;
+    $('.cookiealert').hide();
+  }
+
+  setTimeout(() => {
+    let x = getCookie("accepted");
+    if (x == "") {
+      $(".cookiealert").show();
+      $(".cookiealert").css("display", "flex");
+    } else {
+      console.log(x);
+    }
+  }, 3000);
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+</script>
+{% endput %}

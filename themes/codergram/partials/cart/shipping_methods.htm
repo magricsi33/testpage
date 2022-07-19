@@ -1,0 +1,35 @@
+<div class="card mb-3">
+    <div class="card-header fw-bold text-white">
+        Szállítási mód
+    </div>
+    <div class="card-body">
+        {% for key, item in cart.shippingMethods() %}
+        <div id="shipping_methods" class="mb-3">
+            <input type="checkbox" name="shipping_mode" class="custom-control-input" value="{{ item.id }}"
+                id="customCheck-{{key}}" {{ cart.cart.shipping.id == item.id ? 'checked' : '' }} hidden />
+            <label class="custom-control-label px-3 w-100" for="customCheck-{{key}}">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <img src="{{  item.logo.path }}" height="100" width="100" class="mr-3 of-contain" alt="" />
+                    </div>
+                    <div class="col-lg-5">
+                        <p class="m-0 fw-bold m-0 text-white">
+                            {{ item.name }}
+                        </p>   
+                        <div class="d-block text-secondary m-0 item-description">
+                            {{ item.description|raw }}
+                        </div>
+                    </div>
+                    <p class="text-secondary col-lg-4 m-0">
+                        {% if item.getSelfCost(cart.cart) == 0 %}
+                        Ingyenes
+                        {% else %}
+                        +{{ item.getSelfCost(cart.cart) }} Ft
+                        {% endif %}
+                    </p>
+                </div>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>

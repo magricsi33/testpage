@@ -1,0 +1,68 @@
+title = "Fizetés"
+url = "/fizetes/:orderid"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "user"
+redirect = "belepes"
+==
+<?php
+
+use Illuminate\Support\Facades\Redirect;
+use LivestudioDev\Lscart\Models\Order;
+use LivestudioDev\Lscartbarion\Classes\BarionDriver;
+use LivestudioDev\Lscartborgun\Classes\BorgunDriver;
+
+function onStart()
+{
+    $orderId = $this->param('orderid');
+    $order = Order::find($orderId);
+
+    if (isset($order) && $order->status == 0 && $order->payment->payment_gate == "Borgun") {
+        $order->status = 4;
+        $order->save();
+    } else if (isset($order) && $order->status == 0 && $order->payment->payment_gate == "Barion") {
+        $order->status = 4;
+        $order->save();
+        $driver = new BarionDriver();
+        return Redirect::to($driver->getPayUrl($order));
+    } else if (isset($order) && $order->status == 0 && $order->payment->payment_gate == null){
+        return Redirect::to("/koszonjuk/{$order->id}");
+    } else {
+        return Redirect::to('/404');
+    }
+
+    $driver = new BorgunDriver();
+    $this['driver'] = $driver;
+    $this['formdata'] = $driver->getPayForm($order);
+}
+?>
+==
+<section class="payment my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="{{ driver.url }}" id="payment-form" method="post">
+                    <div class="form-group">
+                    {% for field, value in formdata %}
+                        <input type="hidden" class="form-control" name="{{ field }}" value="{{ value }}" />
+                    {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <h4 class="text-center">Hamarosan átirányítjuk önt a Borgun fizetési felületére...</h4>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% put scripts %}
+<script>
+    $(document).ready(function() {
+        $("#payment-form").submit();
+    });
+</script>
+{% endput %}

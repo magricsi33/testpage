@@ -1,0 +1,28 @@
+{% for key, item in cart.cart.shipping.payments %}
+{% set method = cart.cart.shipping.getPaymentMethod(item.payment) %}
+<div id="payment_methods_card" class="mb-3">
+    <input type="checkbox" name="payment_mode" class="custom-control-input" id="paymentCheck-{{ key }}"
+        value="{{ item.payment }}" {{ item.payment == cart.cart.payment.id ? 'checked' : '' }} hidden />
+    
+    <label class="custom-control-label px-3 py-2 w-100" for="paymentCheck-{{key}}">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <p class="m-0 fw-bold m-0 text-white">
+                    {{ method.name }}
+                </p>   
+                <div class="d-block text-secondary m-0 item-description">
+                    {{ method.description|raw }}
+                </div>
+            </div>
+            <p class="text-secondary col-lg-4 m-0">
+                {% if item.value != 0%}
+                +{{ item.value }} Ft
+                {% else %}
+                Ingyenes
+                {% endif %}
+            </p>
+        </div>
+    </label>
+
+</div>
+{% endfor %}

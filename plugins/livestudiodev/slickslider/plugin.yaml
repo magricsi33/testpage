@@ -1,0 +1,24 @@
+plugin:
+    name: 'livestudiodev.slickslider::lang.plugin.name'
+    description: 'livestudiodev.slickslider::lang.plugin.description'
+    author: LivestudioDev
+    icon: oc-icon-reorder
+    homepage: ''
+permissions:
+    livestudiodev.slickslider.manage_slide_shows:
+        tab: 'livestudiodev.slickslider::lang.plugin.name'
+        label: 'livestudiodev.slickslider::lang.slickslider.manage_slide_shows'
+    livestudiodev.slickslider.manage_slides:
+        tab: 'livestudiodev.slickslider::lang.plugin.name'
+        label: 'livestudiodev.slickslider::lang.slickslider.manage_slides'
+    livestudiodev.slickslider.create_slide_shows:
+        tab: 'livestudiodev.slickslider::lang.plugin.name'
+        label: 'livestudiodev.slickslider::lang.slickslider.create_slide_shows_label'
+navigation:
+    slide_shows:
+        label: 'livestudiodev.slickslider::lang.slickslider.slide_shows'
+        url: livestudiodev/slickslider/slideshows
+        icon: icon-reorder
+        permissions:
+            - livestudiodev.slickslider.manage_slide_shows
+            - livestudiodev.slickslider.manage_slides

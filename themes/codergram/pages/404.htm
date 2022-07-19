@@ -1,0 +1,23 @@
+title = "Page not found (404)"
+url = "/404"
+layout = "default"
+is_hidden = 0
+==
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mt-5">
+                <h1>Az oldal nem található</h1>
+                <p class="my-3 text-secondary">
+                    Sajnáljuk, ez az oldal áthelyezésre került vagy már nem létezik.
+                </p>
+
+                     <a href="{{ 'home'|page }}" class="btn btn-primary fw-bold">Visszalépés a főoldalra</a>
+
+            </div>
+            <div class="col-lg-6 text-center" id="about-bg-img">
+                <img src="{{ 'assets/images/404.png'|theme }}" alt="" />
+            </div>  
+        </div>
+    </div>
+</div>

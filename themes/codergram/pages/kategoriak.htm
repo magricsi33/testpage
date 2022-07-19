@@ -1,0 +1,63 @@
+title = "Kategóriák"
+url = "/kategoriak/:slug"
+layout = "default"
+meta_title = "Kategóriák"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+==
+<?php
+use LivestudioDev\Lscart\Models\Category;
+use LivestudioDev\Lscart\Models\Product;
+function onStart()
+{
+	$category = Category::where('slug', $this->param('slug'))->first();
+	$this['category'] = $category;
+	$this['categories'] = Category::where('parent_id', $category->id)->where('active', 1)->get();
+	$this['related_products'] = Product::inRandomOrder()->limit(3)->get();
+}
+?>
+==
+<div id="category-page">
+	<div class="container">
+		<div class="row py-3">
+			<div class="col-12">
+				{% partial 'site/breadcrumbs' %}
+			</div>
+		</div>
+		{% if categories|length == 0 %}
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="my-4">Sajnáljuk de jelenleg ebben a kategóriában nincs egy termékünk sem!</h2>
+			</div>
+		</div>
+		{% else %}
+		<div class="row">
+			<div class="col-12">
+				<h1 class="mb-5 color-dark font-weight-bold">{{ category.name }}</h1>
+			</div>
+			<div class="col-lg-6 order-2 order-lg-1">
+				<div>
+					{{ category.description|md }}
+				</div>
+			</div>
+			<div class="col-lg-6 order-1 order-lg-2 mb-5 mb-lg-0">
+				{% for item in categories %}
+				<div class="card text-center category mt-5">
+					<a href="{{ 'termekek'|page({slug: item.slug}) }}">
+						<div class="d-flex align-items-stretch">
+							<div class="w-50 left position-relative">
+								<h2 class="font-weight-bold name">{{ item.name }}</h2>
+							</div>
+							<div class="w-50 right">
+								<img src="{{ item.image.path }}" alt="{{ item.name }}" />
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>

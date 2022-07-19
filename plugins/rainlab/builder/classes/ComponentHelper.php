@@ -53,8 +53,7 @@ class ComponentHelper
             }
         }
 
-        $expiresAt = now()->addMinutes(1);
-        Cache::put($key, serialize($result), $expiresAt);
+        Cache::put($key, serialize($result), 1);
 
         return $this->modelListCache = $result;
     }
@@ -102,8 +101,7 @@ class ComponentHelper
             $result[$columnName] = $columnName;
         }
 
-        $expiresAt = now()->addMinutes(1);
-        Cache::put($key, serialize($result), $expiresAt);
+        Cache::put($key, serialize($result), 1);
 
         return $result;
     }

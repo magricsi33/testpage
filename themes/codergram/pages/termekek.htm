@@ -1,0 +1,99 @@
+title = "Termékek"
+url = "/termekek/:slug"
+layout = "default"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[session]
+security = "user"
+redirect = "belepes"
+==
+<?php
+use LivestudioDev\Lscart\Models\Category;
+function onStart()
+{
+	$category = Category::where('slug', $this->param('slug'))->first();
+	$this->page->meta_description = $category->meta_description;
+	$this->page->meta_title = $category->meta_title;
+	if(!$category) {
+        return Redirect::to("404");
+    }
+	$this['category'] = $category;
+	$this['activeSlug'] = $category->parent ? $category->parent->slug : $category->slug;
+	$this['products'] = $category->products()->where('status', '<>', 0)->get()->sortBy('sort_order');
+	$this['fcategories'] = Category::whereNull('parent_id')->where('active',  1)->with('children')->get();
+}
+?>
+==
+<div class="container" id="products">
+	<div class="row">
+		<div class="col-12">
+			<h1 class="fw-bold color-dark mb-5">{{ category.name }}</h1>
+			<p>
+				{{ category.description|md }}
+			</p>
+		</div>
+	</div>
+	<div class="row align-items-stretch">
+		<div class="col-lg-12">
+			<div class="row">
+				{% for product in products %}
+				<div class="col-md-6 col-lg-3 text-center mb-4">
+					<a href="{{ 'termek'|page({slug: product.slug}) }}" class="text-decoraiton-none text-dark">
+						<div class="card product">
+							<div class="card-body p-4 d-flex flex-column justify-content-start">
+								<div class="productImage">
+									<img src="{{ product.image.path|resize(250, false, {mode: 'crop'}) }}" class="mb-2" alt="{{ product.name }}" />
+								</div>
+								<h2 class="fw-bold my-3 h4">{{ product.name|truncate(80) }}</h2>
+								<div>
+									{% if product.price_brutto == 0 %}
+									<h4 class="prim mb-0 fw-bold">
+										Árajánlatkérés
+									</h4>
+									{% elseif product.isDiscounted %}
+									<div class="d-flex w-100 justify-content-center align-items-center">
+										<del class="text-secondary m-0 me-3">
+											{{ product.price_brutto|number_format(0, ',', ' ') }} Ft
+										</del>										
+										<h4 class="prim mb-0">
+											{{ product.getItemPrice(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+											Ft
+										</h4>
+									</div>
+									<p class="text-secondary">
+										{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+										Ft + ÁFA
+									</p>
+									{% elseif user and user.discounts %}
+									<h4 class="prim mb-0">
+										{{ product.getItemPrice(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+										Ft
+									</h4>
+									<p class="text-secondary">
+										{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+										Ft + ÁFA
+									</p>
+									{% else %}
+									<h4 class="prim mb-0">
+										{{ product.price_brutto|number_format(0, ',', ' ') }} Ft
+									</h4>
+									<p class="text-secondary">
+										{{ product.price|number_format(0, ',', ' ') }} Ft + ÁFA
+									</p>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% else %}
+				<div class="col-12">
+					<h4 class="text-center">Sajnáljuk de jelenleg ebben a kategóriában nincs egy termékünk sem!</h4>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div

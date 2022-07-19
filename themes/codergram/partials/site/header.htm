@@ -1,0 +1,38 @@
+<p class="m-0 text-white fw-bold">
+	Üdv, {{ user.name }}!
+</p>
+<div class="d-flex align-items-center">
+	<a href="{{ 'penztar'|page }}" class="d-block position-relative ms-5">
+		<i class="fa-light fa-cart-shopping text-white fa-xl"></i>
+		<div id="cartCounter2">{% partial 'cart/counter' %}</div>
+	</a>
+	{% if user %}
+	<a href="" onclick="onLogout(event);" class="text-white ms-5">
+		<i class="fa-solid fa-arrow-right-from-bracket"></i>
+	</a>
+	{% else %}
+	<a href="{{ 'belepes'|page }}" class="text-white ms-5 btn btn-primary fw-medium">
+		Belépés
+	</a>
+	{% endif %}
+</div>
+
+{% put scripts %}
+<script>
+
+	onLogout = (e) => {
+		e.preventDefault();
+
+		$.request("onLogout", {
+			complete: () => {
+				$.oc.flashMsg({
+					interval: 2,
+					text: 'Sikeres kijelentkezés',
+					class: 'success'
+				});
+			}
+		})
+	}
+
+</script>
+{% endput %}

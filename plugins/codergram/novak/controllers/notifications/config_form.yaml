@@ -1,0 +1,10 @@
+name: Notifications
+form: $/codergram/novak/models/notification/fields.yaml
+modelClass: Codergram\Novak\Models\Notification
+defaultRedirect: codergram/novak/notifications
+create:
+    redirect: 'codergram/novak/notifications/update/:id'
+    redirectClose: codergram/novak/notifications
+update:
+    redirect: codergram/novak/notifications
+    redirectClose: codergram/novak/notifications

@@ -1,0 +1,160 @@
+title = "Főoldal"
+url = "/"
+layout = "default"
+meta_title = "Főoldal"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[blogPosts]
+pageNumber = "{{ :page }}"
+postsPerPage = 100
+noPostsMessage = "No posts found"
+sortOrder = "published_at desc"
+categoryPage = 404
+postPage = 404
+
+[session]
+security = "user"
+redirect = "belepes"
+==
+<?php
+use Codergram\Novak\Models\Notification;
+use RainLab\User\Facades\Auth;
+
+function onStart() {
+    $user = Auth::user();
+
+    if ($user) {
+        $notifications = Notification::where('user_id', $user->id)->get();
+
+        $this['notiNews'] = $notifications->where('saw', 0);
+        $this['notiOlds'] = $notifications->where('saw', 1);
+    
+        //dd($notifications);
+    }
+}
+
+function onSawNoti() {
+    $input = collect(Input::all());
+    $notification = Notification::findOrFail($input->get('noti_id'));
+    $notification->saw = true;
+
+    if ($notification->save()) {
+        Flash::success("ok");
+
+        return Redirect::to("/");
+        
+    } else {
+        Flash::error("Valami hiba törént, kérjük próbáld újra!");
+    }    
+
+}
+
+?>
+
+==
+
+
+<!-- <div class="page-heading">
+    <h1 class="h3">Hírfolyam</h1>
+</div> -->
+<div class="page-content">
+    <section class="row">
+    
+    {% set posts = blogPosts.posts %}
+    
+        <div class="col-lg-2"></div>
+        <div class="col-lg-5">
+            <h2 class="h3 mb-4">Hírfolyam</h2>
+
+            <!-- Post box -->
+            {% for post in posts %}
+            <div class="card card-boy p-0 text-white">
+                <p class="fw-bold m-0 px-4 pt-4">{{ post.title }}</p>
+                <p class="text-secondary m-0 px-4">{{ post.published_at|date("Y. m. d.") }}</p>
+                <div class="px-4 py-3">
+                    {{ post.content_html|raw }}
+                </div>
+                {% if post.featured_images[0] %}
+                <div class="post-image-container">
+                    <img src="{{ post.featured_images[0].path }}" alt="">
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <!-- pagination -->
+            {% if posts.lastPage > 1 %}
+                <ul class="pagination">
+                    {% if posts.currentPage > 1 %}
+                        <li><a href="{{ this.page.baseFileName | page({ (blogPosts.pageParam): (posts.currentPage-1) }) }}">&larr; Prev</a></li>
+                    {% endif %}
+
+                    {% for page in 1..posts.lastPage %}
+                        <li class="{{ posts.currentPage == page ? 'active' : null }}">
+                            <a href="{{ this.page.baseFileName | page({ (blogPosts.pageParam): page }) }}">{{ page }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if posts.lastPage > posts.currentPage %}
+                        <li><a href="{{ this.page.baseFileName | page({ (blogPosts.pageParam): (posts.currentPage+1) }) }}">Next &rarr;</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+
+        </div>
+        <div class="col-lg-3">
+            <h2 class="h3 mb-4">Értesítések</h2>
+
+            <h6 class="h6 mb-4">Új értesítés</h6>
+
+            {% if notiNews|length > 0 %}
+            {% for notification in notiNews %}
+            <div class="card card-boy p-0 text-white">
+                <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
+                <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
+                <div class="px-4 py-3">
+                    {{ notification.description|raw }}
+                </div>
+                <div class="px-4 pb-4">
+                    <form data-request="onSawNoti" data-request-flash>
+                        <input type="text" name="noti_id" value="{{ notification.id }}" hidden>
+                        <button class="btn btn-primary fw-bold" type="submit">
+                            <i class="fa-solid fa-circle-check me-2"></i> Olvasottra állít
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+                <p class="text-secondary"><i class="fa-solid fa-circle-check me-2 prim"></i> Nincs új értesítés</p>
+            {% endif %}
+
+            <h6 class="h6 mb-4">Régi értesítések</h6>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Összes értesítés megtekintése
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="pt-4">
+                            {% for notification in notiOlds %}
+                            <div class="card card-boy p-0 text-white mb-3">
+                                <p class="fw-bold m-0 px-4 pt-4">{{ notification.title }}</p>
+                                <p class="text-secondary m-0 px-4">{{ notification.created_at|date("Y. m. d.") }}</p>
+                                <div class="px-4 py-3">
+                                    {{ notification.description|raw }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </section>
+</div>

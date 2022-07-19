@@ -1,0 +1,15 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table livestudiodev_lssubs_subscribers'
+    - builder_table_create_livestudiodev_lssubs_subscribers.php
+1.0.3:
+    - 'Created table livestudiodev_lssubs_themes'
+    - builder_table_create_livestudiodev_lssubs_themes.php
+1.0.4:
+    - 'Created table livestudiodev_lssubs_subscribers_themes'
+    - builder_table_create_livestudiodev_lssubs_subscribers_themes.php
+1.0.5:
+    - 'Added default values as language properties'
+1.0.6:
+    - 'Fixed index issues'

@@ -1,0 +1,100 @@
+{% if user and not product.isDiscounted and (empDiscount is not null and empDiscount|length > 0) %}
+<del>
+    <h2 class="prim mb-0">
+        {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }}
+    </h2>
+    <p class="text-secondary">
+        {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }} + ÁFA
+    </p>
+</del>
+<br />
+<p class="mb-0 text-success mt-3">{{ empDiscount.name }}, -{{ empDiscount.value }}%</p>
+<h2 class="text-success mb-0">
+    {{ product.getItemPrice(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }}
+</h2>
+<p class="text-secondary">
+    {{ product.getItemPriceNetto(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+</p>
+{% elseif not user and product.isDiscounted %}
+<del>
+    <h2 class="prim mb-0">
+        {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }}
+    </h2>
+    <p class="text-secondary">
+        {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }} + ÁFA
+    </p>
+</del>
+<br />
+<p class="prim mb-0 mt-3">{{ discount.name }}: -{{ discount.discount }}%</p>
+<h2 class="prim mb-0">
+    {{ product.getItemPrice(variant_id, null, true, null, null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }}
+</h2>
+<p class="text-secondary">
+    {{ product.getItemPriceNetto(variant_id, null, true, null, null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+</p>
+{% else %}
+{% if product.isDiscounted %}
+<del>
+    <h2 class="prim mb-0">
+        {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }}
+    </h2>
+    <p class="text-secondary">
+        {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }} + ÁFA
+    </p>
+</del>
+<br />
+{% if empDiscount is not null and empDiscount|length > 0 %}
+<p class="mb-0 text-success mt-3 font-weight-bold">
+    {{ empDiscount.name }}, -{{ empDiscount.value }}%
+</p>
+{% endif %}
+<h2 class="text-success mb-0 font-weight-bold">
+    {{ product.getItemPrice(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }}
+</h2>
+<p class="text-secondary">
+    {{ product.getItemPriceNetto(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+</p>
+{% else %}
+<h2 class="prim mb-0 font-weight-bold">
+    {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }}
+</h2>
+<p class="text-secondary">
+    {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+</p>
+{% endif %}
+
+{% if product.isDiscounted %}
+<p class="prim mb-0 mt-3">{{ discount.name }}: -{{ discount.discount }}%</p>
+{% endif %}
+<div class="mt-0">
+    {% if empDiscount is not null and empDiscount|length > 0 %}
+    <h2 class="mb-0 prim">
+        {{ product.getItemPrice(variant_id, cart.cart.currency.id,true, null , user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }}
+    </h2>
+    <small>
+        Nettó ár:
+        {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id,true, null , user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+        {{ cart.cart.currency.shortcode }} + ÁFA
+    </small>
+    {% endif %}
+</div>
+
+{% if product.isDiscounted %}
+<p class="prim">Az akció érvényessége: {{ discount.date_end|date('Y.m.d') }}</p>
+{% endif %}
+{% endif %}

@@ -1,0 +1,10 @@
+name: SlideShows
+modelClass: LivestudioDev\SlickSlider\Models\SlideShows
+form: $/livestudiodev/slickslider/models/slideshows/fields.yaml
+defaultRedirect: livestudiodev/slickslider/slideshows
+create:
+    redirect: 'livestudiodev/slickslider/slideshows/update/:id'
+    redirectClose: livestudiodev/slickslider/slideshows
+update:
+    redirect: livestudiodev/slickslider/slideshows
+    redirectClose: livestudiodev/slickslider/slideshows

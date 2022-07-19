@@ -1,0 +1,16 @@
+plugin:
+    name: 'codergram.novak::lang.plugin.name'
+    description: 'codergram.novak::lang.plugin.description'
+    author: Codergram
+    icon: oc-icon-beer
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Kezelő
+        url: codergram/novak/notifications
+        icon: icon-briefcase
+        sideMenu:
+            side-menu-item:
+                label: Értesítések
+                url: codergram/novak/notifications
+                icon: icon-bell

@@ -1,7 +1,6 @@
 <?php namespace RainLab\Builder\Classes;
 
 use DirectoryIterator;
-use ApplicationException;
 use SystemException;
 use Validator;
 use Lang;

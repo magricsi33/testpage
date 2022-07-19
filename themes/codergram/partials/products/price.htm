@@ -1,0 +1,17 @@
+{% if product.variants|length > 0 %}
+<h4 class="mb-4 price">
+    {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+    <br />
+    ({{ product.getItemPrice(variant_id, cart.cart.currency.id)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }})
+</h4>
+{% else %}
+<h4 class="mb-4 price">
+    {{ product.getItemPriceNetto(null, cart.cart.currency.id)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }} + ÁFA
+    <br />
+    ({{ product.getItemPrice(null, cart.cart.currency.id)|number_format(0, ',', ' ') }}
+    {{ cart.cart.currency.shortcode }})
+</h4>
+{% endif %}

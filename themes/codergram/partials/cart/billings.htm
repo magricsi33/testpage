@@ -1,0 +1,72 @@
+{% set address = user.active_billing_address.address %}
+<div class="row">
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Számlázási név</small></label>
+        <input type="text" name="bill_name" id="bill_name" class="form-control" placeholder="Számlázási név"
+            value="{{ user.active_billing_address.person_name  }}" required />
+    </div>
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >E-mail cím</small></label>
+        <input class="form-control" type="email" name="email" placeholder="E-mail cím" required />
+    </div>
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Telefonszám</small></label>
+        <input class="form-control" type="text" name="phone" placeholder="Telefonszám" required />
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-3">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Irányítószám</small></label>
+        <input type="number" name="bill_postcode" class="form-control" placeholder="Ir.szám"
+            value="{{ address.postcode }}" required />
+    </div>
+    <div class="form-group col-md-3">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Település</small></label>
+        <input type="text" name="bill_city" class="form-control" placeholder="Település" value="{{ address.city }}"
+            required />
+    </div>
+    <div class="form-group col-md-3">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Közterület megnevezése</small></label>
+        <input type="text" name="bill_address_name" class="form-control" placeholder="Közterület neve"
+            value="{{ address.address_name }}" required />
+    </div>
+    <div class="form-group col-md-3">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Közterület jellege</small></label>
+        <select name="bill_address_type" class="form-control" id="" required>
+            <option value="" selected disabled>Közterület jellege</option>
+            <optgroup label="Válasz:">
+                <option {{ address.address_type == 'tér' ? "selected" : "" }} value="tér">tér</option>
+                <option {{ address.address_type == 'út' ? "selected" : "" }} value="út">út</option>
+                <option {{ address.address_type == 'utca' ? "selected" : "" }} value="utca">utca</option>
+                <option {{ address.address_type == 'köz' ? "selected" : "" }} value="köz">köz</option>
+                <option {{ address.address_type == 'sugárút' ? "selected" : "" }} value="sugárút">sugárút</option>
+                <option {{ address.address_type == 'körút' ? "selected" : "" }} value="körút">körút</option>
+                <option {{ address.address_type == 'helyrajzi szám' ? "selected" : "" }} value="helyrajzi szám">
+                    helyrajzi szám</option>
+                <option {{ address.address_type == 'tanya' ? "selected" : "" }} value="tanya">tanya</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Házszám</small></label>
+        <input type="text" name="bill_flat_number" class="form-control" placeholder="Házszám"
+            value="{{ address.flat_number }}" required />
+    </div>
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Emelet</small></label>
+        <input type="text" name="bill_floor" class="form-control except" value="{{ address.floor }}"
+            placeholder="Emelete" />
+    </div>
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Ajtó</small></label>
+        <input type="text" name="bill_door_num" class="form-control except" value="{{ address.door_num }}"
+            placeholder="Ajtó" />
+    </div>
+    <div class="form-group col-md-4">
+        <label for="" class="text-black-50 font-weight-normal mb-1"><small class="text-white" >Adószám</small></label>
+        <input type="text" name="tax_number" class="form-control except"
+            placeholder="Adószám" />
+    </div>
+</div>

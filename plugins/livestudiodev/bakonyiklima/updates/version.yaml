@@ -1,0 +1,11 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table livestudiodev_bakonyiklima_offers'
+    - builder_table_create_livestudiodev_bakonyiklima_offers.php
+1.0.3:
+    - 'Updated table livestudiodev_bakonyiklima_offers'
+    - builder_table_update_livestudiodev_bakonyiklima_offers.php
+1.0.4:
+    - 'Updated table livestudiodev_bakonyiklima_offers'
+    - builder_table_update_livestudiodev_bakonyiklima_offers_2.php

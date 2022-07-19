@@ -1,0 +1,13 @@
+plugin:
+    name: 'livestudiodev.lscore::lang.plugin.name'
+    description: 'livestudiodev.lscore::lang.plugin.description'
+    author: LivestudioDev
+    icon: oc-icon-bolt
+    homepage: ''
+permissions:
+    lscore.canViewSitemapResult:
+        tab: LS-SEO
+        label: 'Sitemap eredmények megtekintése'
+    lscore.canEditSitemapConfig:
+        tab: LS-SEO
+        label: 'Sitemap konfiguráció szerkesztése'

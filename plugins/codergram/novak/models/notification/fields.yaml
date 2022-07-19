@@ -1,0 +1,22 @@
+fields:
+    title:
+        label: Cím
+        span: auto
+        type: text
+    owner:
+        label: Felhasználó
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    description:
+        label: Szöveg
+        size: large
+        span: full
+        type: richeditor
+    saw:
+        label: Látta
+        span: auto
+        disabled: 0
+        readOnly: 0
+        type: switch

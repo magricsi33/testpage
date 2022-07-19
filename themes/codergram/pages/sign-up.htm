@@ -1,0 +1,68 @@
+title = "Regisztráció"
+url = "/regisztracio"
+layout = "full"
+is_hidden = 0
+
+[account]
+redirect = "home"
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "guest"
+redirect = "home"
+==
+
+<div class="d-flex flex-wrap">
+	<div class="col-xxl-5 col-lg-8 col-12 d-flex justify-content-center align-items-center vh-100 bg-white p-0 m-0">
+		<div class="col-xxl-2"></div>
+		<div class="card card-body px-5 bg-white col-xxl-8 ">
+			<form data-request="onRegister" data-request-flash>
+
+
+
+
+				<h1 class="prim h1 mb-3"><i class="fa-light fa-user me-2"></i> Fiók létrehozása</h1>
+				{% if canRegister %}
+				<div class="form-floating mb-3 mt-5">
+					<input type="name" name="name" class="form-control bg-white login-input text-dark" id="name" placeholder="Teljes név" required>
+					<label for="name" class="text-secondary">Teljes név</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="email" name="email" class="form-control bg-white login-input text-dark" id="email" placeholder="E-mail cím" required>
+					<label for="email" class="text-secondary">E-mail cím</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="password" name="password" class="form-control bg-white login-input text-dark" id="password" placeholder="Jelszó" required>
+					<label for="password" class="text-secondary">Jelszó</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="password" name="password" class="form-control bg-white login-input text-dark" id="password" placeholder="Jelszó megerősítése" required>
+					<label for="password" class="text-secondary">Jelszó megerősítése</label>
+				</div>
+
+				<p class="text-secondary my-4">
+					Ha rendelkezik fiókkal, <a href="{{ 'belepes'|page }}" class="prim">ide kattintva</a> beléphet!
+				</p>
+
+				<button type="submit" class="btn btn-primary fw-bold">Fiók létrehozása</button>
+
+				{% else %}
+					<!-- Registration is disabled. -->
+				{% endif %}
+	
+
+	
+			</form>
+		</div>
+		<div class="col-xxl-2"></div>
+	</div>
+	<div class="col-xxl-7 col-lg-4 d-none p-0 m-0 d-lg-flex justify-content-center align-items-center">
+		<div class="text-center">
+			<i class="fa-duotone fa-cake-candles fa-2xl prim h1"></i>
+			<p class="mb-4 prim h3 fw-bold">Novák Cukrászda</p>
+		</div>
+	</div>
+</div>
+

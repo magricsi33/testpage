@@ -1,0 +1,10 @@
+name: Themes
+form: $/livestudiodev/lssubs/models/theme/fields.yaml
+modelClass: LivestudioDev\LSSubs\Models\Theme
+defaultRedirect: livestudiodev/lssubs/themes
+create:
+    redirect: 'livestudiodev/lssubs/themes/update/:id'
+    redirectClose: livestudiodev/lssubs/themes
+update:
+    redirect: livestudiodev/lssubs/themes
+    redirectClose: livestudiodev/lssubs/themes

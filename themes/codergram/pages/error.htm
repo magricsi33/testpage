@@ -1,0 +1,23 @@
+title = "Error (500)"
+url = "/error"
+layout = "default"
+is_hidden = 0
+==
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mt-5">
+                <h1>500 | Hiba</h1>
+                <p class="my-3 text-secondary">
+                    Az oldal nem jeleníthető meg. Kérjük vegye fel a kapcsolatot az oldal üzemeltetőjével.
+                </p>
+
+                     <a href="{{ 'home'|page }}" class="btn btn-primary fw-bold">Visszalépés a főoldalra</a>
+
+            </div>
+            <div class="col-lg-6 text-center" id="about-bg-img">
+                <img src="{{ 'assets/images/404.png'|theme }}" alt="" />
+            </div>  
+        </div>
+    </div>
+</div>

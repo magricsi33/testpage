@@ -1,0 +1,199 @@
+==
+<div class="card mb-3 bg-white">
+    <div class="card-header">
+        <span class="d-inline-block fw-bold text-white">Kosaram</span>
+        <!-- <span class="d-inline-block float-right">
+            <a href="#">Módosítás</a>
+        </span> -->
+    </div>
+    <div class="card-body">
+        <table class="table border-0">
+            <tbody>
+                {% for item in cart.cart.items %}
+                {% set product = item.product %}
+                <tr class="mb-3">
+                    <td class="border-0 align-middle">
+                        <a href="{{ 'termek'|page({slug: product.slug}) }}" target="_blank" class="tt"
+                            title="{{ product.name }}">
+                            <img src="{{ product.image.path }}" width="50" height="50" class="of-cover" alt="" />
+                        </a>
+                    </td>
+                    <td class="border-0 align-middle">{{ item.quantity }} db</td>
+                    {% if product.variants|length > 0 %}
+                    <td class="border-0 align-middle">
+                        {{ product.getItemPriceNetto(item.variant_id, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}
+                    </td>
+                    {% else %}
+                    <td class="border-0 align-middle">
+                        {{ product.getItemPriceNetto(null, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}
+                    </td>
+                    {% endif %}
+                    <td class="border-0 align-middle">
+                        <button type="button" class="btn btn-danger tt" title="törlés" data-placement="right"
+                        onclick="deleteItem({{ item.id }}, { id: {{ product.id }}, name: '{{ product.name }}', price: {{ product.price }}, quantity: {{ item.quantity }} });">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="card-footer font-weight-bold">
+        <span class="d-inline-block fw-bold text-white">Összesen: </span>
+        <span class="d-inline-block float-right text-white">
+            {{ cart.totalNetto(false, true)|number_format(0, ',', ' ') }} {{ cart.cart.currency.shortcode }} + ÁFA
+        </span>
+    </div>
+</div>
+<!-- <div class="card mb-3">
+    <div class="card-header">
+        <span class="d-inline-block font-weight-bold">Van kuponod?</span>
+    </div>
+    {% partial 'cart/coupon' %}
+</div> -->
+<div class="card mb-3">
+    <div class="card-header">
+        <h2 class="my-4 font-weight-bold">Összesítés</h2>
+        <table class="table price-table">
+            <tbody>
+                <tr>
+                    <td class="font-weight-bold border-0">Nettó ár:</td>
+                    <td class="border-0 text-end">{{ cart.totalNetto(false, true)|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold border-0">ÁFA:</td>
+                    <td class="border-0 text-end">
+                        {{ (cart.totalBrutto(false, true) - cart.totalNetto(false, true))|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}
+                    </td>
+                </tr>
+                {% if cart.cart.coupon %}
+                <tr>
+                    <td class="font-weight-bold border-0">Kupon</td>
+                    <td class="border-0 text-end">-
+                        {% if cart.cart.coupon.value_type == 50 %}
+                        {{ cart.cart.coupon.value  }}%
+                        ({{ (cart.totalBrutto(false, true) - cart.totalBrutto())|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }})
+                        {% else %}
+                        {{ cart.cart.coupon.value|number_format(0, ',', ' ') }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="font-weight-bold border-0">Szállítási díj:</td>
+                    <td class="border-0 text-end">{{ cart.ShippingCost(cart.cart)|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}
+                    </td>
+                </tr>
+                </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        Összesen:
+                    </td>
+                    <td class="text-end">{{ cart.absolutePrice|number_format(0, ',', ' ') }}
+                        {{ cart.cart.currency.shortcode }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="customCheck1" required>
+            <label class="form-check-label text-secondary" for="customCheck1">
+                Elfogadom az <a href="{{ 'blog'|page({slug: 'altalanos-szerzodesi-feltetelek'}) }}" target="_blank">Általános szerződési feltételeket</a> és az 
+                <a href="{{ 'blog'|page({slug: 'adatkezelesi'}) }}" target="_blank">Adatkezelési nyilatkozatot</a>!
+            </label>
+        </div>
+        <button type="submit" form="form1" class="btn btn-primary fw-bold mt-4 w-100">Rendelés véglegesítése</button>
+    </div>
+</div>
+<!-- <div class="card bg-white">
+    <div class="card-body bg-transparent">
+        {% partial 'cart/barion' %}                    
+    </div>
+</div> -->
+
+
+{% put scripts %}
+<script type="text/javascript">
+    function deleteItem(id, dataLayerItem) {
+        Swal.fire({
+            title: 'Biztos törölni szeretnéd?',
+            text: "Törlés után nem lehet visszaállítani",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Igen, törlöm',
+            cancelButtonText: 'Mégse'
+        }).then((result) => {
+            if (result.value) {
+                $(this).request("onRemoveCartItem", {
+                    data: {
+                        id: id
+                    },
+                    complete: function () {
+                        Swal.fire(
+                            'Törölve!',
+                            'Sikeres törölve!',
+                            'success'
+                        );
+                        removeFromCart(dataLayerItem);
+                        location.reload();
+                    }
+                });
+            }
+        });
+        
+    }
+
+    function deleteCoupon() {
+        Swal.fire({
+            title: 'Biztos törölni szeretnéd?',
+            text: "Törlés után nem lehet visszaállítani",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Igen, törlöm',
+            cancelButtonText: 'Mégse'
+        }).then((result) => {
+            if (result.value) {
+                $(this).request("onRemoveCoupon", {
+                    complete: function () {
+                        Swal.fire(
+                            'Törölve!',
+                            'Kupon sikeresen eltávolítva!',
+                            'success'
+                        )
+                    }
+                });
+            }
+        });
+    }
+
+    function removeFromCart(item) {
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: 'remove_from_cart',
+            ecommerce: {
+                items: [{
+                    id: item.id,
+                    name: item.name,       // Name or ID is required.
+                    price: item.price,
+                    quantity: item.quantity
+                }]
+            }
+        });
+    location.reload();
+    }
+</script>
+{% endput %}

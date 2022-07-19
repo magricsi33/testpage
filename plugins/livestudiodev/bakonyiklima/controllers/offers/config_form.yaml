@@ -1,0 +1,10 @@
+name: Offers
+form: $/livestudiodev/bakonyiklima/models/offer/fields.yaml
+modelClass: Livestudiodev\Bakonyiklima\Models\Offer
+defaultRedirect: livestudiodev/bakonyiklima/offers
+create:
+    redirect: 'livestudiodev/bakonyiklima/offers/update/:id'
+    redirectClose: livestudiodev/bakonyiklima/offers
+update:
+    redirect: livestudiodev/bakonyiklima/offers
+    redirectClose: livestudiodev/bakonyiklima/offers

@@ -1,0 +1,31 @@
+<div class="breadcrumbs">
+    <nav aria-label="breadcrumb" class="border-0 pl-3">
+        <ol class="breadcrumb bg-transparent py-0">
+            <li class="breadcrumb-item"><a href="{{ 'home'|page }}" class="text-black">Főoldal</a></li>
+            {% if this.page.baseFileName == 'kategoriak' %}
+            <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+            {% elseif this.page.baseFileName == 'termekek' %}
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="{{ 'kategoriak'|page({slug: category.parent.slug}) }}">
+                    {{ category.parent.name }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+            {% elseif this.page.baseFileName == 'termek' %}
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="{{ 'kategoriak'|page({slug: category.parent.slug}) }}">
+                    {{ category.parent.name }}
+                </a>
+            </li>
+            <li class="breadcrumb-item" aria-current="page">
+                <a href="{{ 'termekek'|page({slug: category.slug}) }}">
+                    {{ category.name }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+            {% else %}
+            <li class="breadcrumb-item active" aria-current="page">{{ this.page.title }}</li>
+            {% endif %}
+        </ol>
+    </nav>
+</div>

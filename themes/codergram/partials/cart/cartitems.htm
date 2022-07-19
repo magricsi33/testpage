@@ -1,0 +1,73 @@
+{% if cart.cart.items|length > 0 %}
+{% for item in cart.cart.items %}
+{% set product = item.product %}
+<div class="d-flex flex-column position-relative">
+	<div class="d-flex flex-column flex-md-row product px-3 py-3 mb-3 align-items-start">
+		<div class="align-self-lg-start align-self-center mb-3 mb-md-0">
+			<img src="{{ product.image.path }}" class="img-fluid" alt="Termék" />
+		</div>
+		<div class="flex-grow-1 pl-3 text-left">
+			<div>
+				<h2 class="mb-3 font-weight-bold h4">
+					<a href="{{ 'termek'|page({slug: product.slug}) }}" class="color-dark">
+						{{ product.name }}
+					</a>
+				</h2>
+				<div class="d-flex justify-content-between mt-2 align-items-center">
+					<div>
+						<select name="quantity" onchange="onQuantityChange( { product_id: {{ product.id }}, product_name: '{{ product.name }}', price: {{ product. price }}, quantity: {{ item.quantity }} }, this)" class="d-inline-block w-auto form-control mr-2"
+							data-request="onModifyItemQuantity" data-request-data="id: {{ item.id }}">
+							{% for i in 1..(item.quantity < 10 ? 10 : item.quantity) %}
+							<option {{  item.quantity == i ? 'selected' : '' }} value="{{ i }}">{{ i }}
+							</option>
+							{% endfor %}
+						</select> db
+					</div>
+					<div class="text-right">
+						{% if product.price_brutto == 0 %}
+						Árajánlatkérés
+						{% elseif product.isDiscounted %}
+						<p class="d-block mb-2">
+							<del>
+								{{ product.price_brutto|number_format(0, ',', ' ') }} Ft
+								<!-- <br />{{ product.price|number_format(0, ',', ' ') }} Ft +ÁFA -->
+							</del>
+						</p>
+						<span class="text-danger">
+							<h4 class="text-primary mb-0 font-weight-bold">
+								{{ product.getItemPrice(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+								Ft
+							</h4>
+							<p>
+								{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+								Ft +ÁFA
+							</p>
+						</span>
+						{% elseif user and user.discounts %}
+						<h4 class="text-primary mb-0 font-weight-bold">
+							{{ product.getItemPrice(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+							Ft
+						</h4>
+						<p>
+							{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
+							Ft +ÁFA
+						</p>
+						{% else %}
+						<h4 class="text-primary mb-0 font-weight-bold">
+							{{ product.price_brutto|number_format(0, ',', ' ') }} Ft
+						</h4>
+						<p>
+							Nettó ár: {{ product.price|number_format(0, ',', ' ') }} Ft +ÁFA
+						</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<button class="mb-0 text-right deleteBtn" onclick="deleteItem({{ item.id }}, { id: {{ product.id }}, name: '{{ product.name }}', price: {{ product.price }}, quantity: {{ item.quantity }} });">
+			<i class="fas fa-trash text-black-50"></i>
+		</button>
+	</div>
+</div>
+{% endfor %}
+{% endif %}

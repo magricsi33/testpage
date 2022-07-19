@@ -1,0 +1,40 @@
+fields:
+    ignoreAllFiles:
+        label: 'Fájlok ignorálása'
+        span: auto
+        type: switch
+    ignoreImages:
+        label: 'Képek ignorálása'
+        span: auto
+        default: 1
+        trigger:
+            action: show
+            field: ignoreAllFiles
+            condition: unchecked
+        type: switch
+    schedule:
+        label: 'Sitemap generálásának gyakorisága'
+        options:
+            daily: Naponta
+            weekly: Hetente
+            monthly: Havonta
+        showSearch: true
+        span: auto
+        type: dropdown
+    outputUrl:
+        label: 'Fájl elérése'
+        span: auto
+        default: /ls/sitemap.xml
+        readOnly: 1
+        type: text
+    crawlUrl:
+        label: 'Crawl Url'
+        span: auto
+        type: text
+        comment: 'Az oldal ahol a crawler kezd. (Főoldal by default)'
+    maxPage:
+        label: 'Maximum oldalszám'
+        span: auto
+        disabled: 1
+        type: number
+        comment: 'Ennyi oldalt fog maximum crawlolni'

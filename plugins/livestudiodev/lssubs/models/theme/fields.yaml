@@ -1,0 +1,5 @@
+fields:
+    name:
+        label: 'livestudiodev.lssubs::lang.theme.label.name'
+        span: auto
+        type: text
