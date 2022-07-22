@@ -29,10 +29,10 @@ function onStart()
 <div class="container" id="products">
 	<div class="row">
 		<div class="col-12">
-			<h1 class="fw-bold color-dark mb-5">{{ category.name }}</h1>
-			<p>
+			<h1 class="fw-bold color-dark {{ category.description|md ? '' : 'mb-5' }}">{{ category.name }}</h1>
+			<div class="text-white">
 				{{ category.description|md }}
-			</p>
+			</div>
 		</div>
 	</div>
 	<div class="row align-items-stretch">
