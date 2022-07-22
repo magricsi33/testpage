@@ -1,0 +1,28 @@
+fields:
+    name:
+        label: 'Partner neve'
+        span: auto
+        required: 1
+        type: text
+    url:
+        label: 'Partner linkje'
+        span: auto
+        required: 1
+        type: text
+        commentAbove: '(A partner weboldala amelyre eljutnak a látogatók ha a logóra kattintanak)'
+    description:
+        label: 'Partner leírása'
+        size: ''
+        span: auto
+        type: textarea
+        commentAbove: (Opcionális)
+    image:
+        label: 'Partner logója / képe'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: png
+        span: auto
+        required: 1
+        type: fileupload

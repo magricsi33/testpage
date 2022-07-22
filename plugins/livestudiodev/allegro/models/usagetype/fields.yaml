@@ -1,0 +1,34 @@
+fields:
+    name:
+        label: Megnevezés
+        span: auto
+        required: 1
+        type: text
+    slug:
+        label: 'Keresőbarát név'
+        span: auto
+        type: text
+        comment: 'Automatikus generáláshoz hagyja üresen!'
+    description:
+        label: Leírás
+        size: large
+        span: auto
+        required: 1
+        type: textarea
+    active:
+        label: Aktív
+        span: auto
+        type: switch
+tabs:
+    fields:
+        meta_title:
+            label: 'Meta cím'
+            span: full
+            type: text
+            tab: SEO
+        meta_description:
+            label: 'Meta leírás'
+            size: large
+            span: full
+            type: textarea
+            tab: SEO

@@ -6,12 +6,26 @@ use RainLab\User\Controllers\Users as UserController;
 
 class Plugin extends PluginBase
 {
-    public $require = ['RainLab.User'];
+    public $require = ['RainLab.User', 'Renatio.DynamicPDF'];
     
     public function registerComponents()
     {
         return [
             'LivestudioDev\Lscart\Components\Cart' => 'cart'
+        ];
+    }
+
+    public function registerPDFTemplates()
+    {
+        return [
+            'livestudiodev.lscart::pdf.itemlist',
+        ];
+    }
+
+    public function registerPDFLayouts()
+    {
+        return [
+            'livestudiodev.lscart::pdf.layouts.default'
         ];
     }
 

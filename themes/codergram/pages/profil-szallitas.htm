@@ -57,7 +57,7 @@ requirePassword = 0
                   <option {{ user.trans_address_type == 'utca' ? "selected" : "" }} value="utca">utca</option>
                   <option {{ user.trans_address_type == 'köz' ? "selected" : "" }} value="köz">köz</option>
                   <option {{ user.trans_address_type == 'sugárút' ? "selected" : "" }} value="sugárút">sugárút</option>
-                  <option {{ address.address_type == 'körút' ? "selected" : "" }} value="körút">körút</option>
+                  <option {{ user.trans.address_type == 'körút' ? "selected" : "" }} value="körút">körút</option>
                   <option {{ user.trans_address_type == 'helyrajzi szám' ? "selected" : "" }} value="helyrajzi szám">helyrajzi szám</option>
                   <option {{ user.trans_address_type == 'tanya' ? "selected" : "" }} value="tanya">tanya</option>
                   <option {{ user.trans_address_type == 'lakótelep' ? "selected" : "" }} value="lakótelep">lakótelep</option>
@@ -93,11 +93,5 @@ requirePassword = 0
       <button type="submit" class="btn btn-primary fw-bold">Módosítás</button>
 
     </form>
-
-
-
-
-
-
   </div>
 </div>

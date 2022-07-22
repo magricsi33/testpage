@@ -1,0 +1,5 @@
+fields:
+    name:
+        label: Megnevezés
+        span: auto
+        type: text

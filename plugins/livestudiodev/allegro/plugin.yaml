@@ -1,0 +1,10 @@
+plugin:
+    name: 'livestudiodev.allegro::lang.plugin.name'
+    description: 'livestudiodev.allegro::lang.plugin.description'
+    author: LivestudioDev
+    icon: oc-icon-briefcase
+    homepage: ''
+permissions:
+    isDeveloperAllegro:
+        tab: 'livestudiodev.lscart::lang.plugin.name'
+        label: 'Fejlesztő - Allegro'

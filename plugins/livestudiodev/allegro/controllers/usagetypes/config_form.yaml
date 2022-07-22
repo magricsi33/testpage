@@ -1,0 +1,10 @@
+name: UsageTypes
+form: $/livestudiodev/allegro/models/usagetype/fields.yaml
+modelClass: LivestudioDev\Allegro\Models\UsageType
+defaultRedirect: livestudiodev/allegro/usagetypes
+create:
+    redirect: 'livestudiodev/allegro/usagetypes/update/:id'
+    redirectClose: livestudiodev/allegro/usagetypes
+update:
+    redirect: livestudiodev/allegro/usagetypes
+    redirectClose: livestudiodev/allegro/usagetypes

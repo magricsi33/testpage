@@ -1,0 +1,19 @@
+title = "Allegro termék kérdés"
+layout = "livestudiodev.allegro::pdf.layouts.default"
+description = "Allegro product question template"
+size = "a4"
+orientation = "portrait"
+==
+<h2>Kérdező adatai</h2>
+<ul>
+    <li>E-mail: {{ question.email }}</li>
+    <li>Beküldő neve: {{ question.name|ucfirst }}</li>
+    <li>Beküldő telefonszáma: {{ question.phone }}</li>
+    <li>Kért-e visszahívást: {{ question.callback ? 'Igen' : 'Nem' }}</li>
+    <li>Kérdéses termék: {{ question.product.name }}</li>
+</ul>
+<hr>
+<h3>Kérdésbe foglalt üzenet:</h3>
+<p>
+	{{ question.message }}
+</p>

@@ -10,7 +10,7 @@
             <label class="custom-control-label px-3 w-100" for="customCheck-{{key}}">
                 <div class="row align-items-center">
                     <div class="col-lg-3">
-                        <img src="{{  item.logo.path }}" height="100" width="100" class="mr-3 of-contain" alt="" />
+                        <img src="{{  item.logo.path|resize(500, false, {mode: 'crop'})  }}" height="100" width="100" class="mr-3 of-contain" alt="" />
                     </div>
                     <div class="col-lg-5">
                         <p class="m-0 fw-bold m-0 text-white">

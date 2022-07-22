@@ -15,7 +15,7 @@
                     <td class="border-0 align-middle">
                         <a href="{{ 'termek'|page({slug: product.slug}) }}" target="_blank" class="tt"
                             title="{{ product.name }}">
-                            <img src="{{ product.image.path }}" width="50" height="50" class="of-cover" alt="" />
+                            <img src="{{ product.image.path|resize(500, false, {mode: 'crop'}) }}" width="50" height="50" class="of-cover" alt="" />
                         </a>
                     </td>
                     <td class="border-0 align-middle">{{ item.quantity }} db</td>
@@ -45,7 +45,8 @@
     <div class="card-footer font-weight-bold">
         <span class="d-inline-block fw-bold text-white">Összesen: </span>
         <span class="d-inline-block float-right text-white">
-            {{ cart.totalNetto(false, true)|number_format(0, ',', ' ') }} {{ cart.cart.currency.shortcode }} + ÁFA
+            {{ cart.totalNetto(false, true)|number_format(0, ',', ' ') }} {{ cart.cart.currency.shortcode }} 
+            <!-- + ÁFA -->
         </span>
     </div>
 </div>
@@ -60,19 +61,22 @@
         <h2 class="my-4 font-weight-bold">Összesítés</h2>
         <table class="table price-table">
             <tbody>
+
                 <tr>
                     <td class="font-weight-bold border-0">Nettó ár:</td>
                     <td class="border-0 text-end">{{ cart.totalNetto(false, true)|number_format(0, ',', ' ') }}
                         {{ cart.cart.currency.shortcode }}
                     </td>
                 </tr>
-                <tr>
+
+                <!-- <tr>
                     <td class="font-weight-bold border-0">ÁFA:</td>
                     <td class="border-0 text-end">
                         {{ (cart.totalBrutto(false, true) - cart.totalNetto(false, true))|number_format(0, ',', ' ') }}
                         {{ cart.cart.currency.shortcode }}
                     </td>
-                </tr>
+                </tr> -->
+
                 {% if cart.cart.coupon %}
                 <tr>
                     <td class="font-weight-bold border-0">Kupon</td>
@@ -87,14 +91,14 @@
                     </td>
                 </tr>
                 {% endif %}
+
                 <tr>
                     <td class="font-weight-bold border-0">Szállítási díj:</td>
                     <td class="border-0 text-end">{{ cart.ShippingCost(cart.cart)|number_format(0, ',', ' ') }}
                         {{ cart.cart.currency.shortcode }}
                     </td>
                 </tr>
-                </td>
-                </tr>
+              
                 <tr>
                     <td class="font-weight-bold">
                         Összesen:
@@ -102,14 +106,14 @@
                     <td class="text-end">{{ cart.absolutePrice|number_format(0, ',', ' ') }}
                         {{ cart.cart.currency.shortcode }}</td>
                 </tr>
+
             </tbody>
         </table>
 
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="customCheck1" required>
             <label class="form-check-label text-secondary" for="customCheck1">
-                Elfogadom az <a href="{{ 'blog'|page({slug: 'altalanos-szerzodesi-feltetelek'}) }}" target="_blank">Általános szerződési feltételeket</a> és az 
-                <a href="{{ 'blog'|page({slug: 'adatkezelesi'}) }}" target="_blank">Adatkezelési nyilatkozatot</a>!
+                Elfogadom az Általános szerződési feltételeket és az Adatkezelési nyilatkozatot</a>!
             </label>
         </div>
         <button type="submit" form="form1" class="btn btn-primary fw-bold mt-4 w-100">Rendelés véglegesítése</button>

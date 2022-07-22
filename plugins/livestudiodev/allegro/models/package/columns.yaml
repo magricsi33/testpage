@@ -1,0 +1,22 @@
+columns:
+    id:
+        label: Azonosító
+        type: number
+        sortable: true
+    name:
+        label: Megnevezés
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: Leírás
+        type: text
+    created_at:
+        label: 'Hozzáadási dátum'
+        type: datetime
+    slug:
+        label: Slug
+        type: text
+    active:
+        label: active
+        type: text

@@ -11,15 +11,15 @@
 	<ul class="menu">		
 		<li class="sidebar-item {{ this.page.title == 'Főoldal' ? 'active' }}">
 			<a href="/" class='sidebar-link'>
-				<i class="fa-light fa-house"></i>
+				<i class="fa-light fa-house text-center" style="width: 30px;"></i>
 				<span>Hírfolyam</span>
 			</a>
 		</li>
 		
 		<div class="dropdown mt-2 sidebar-item">
 			<button class="btn dropdown-toggle sidebar-link w-100 justify-content-between" type="button" id="products" data-bs-toggle="dropdown" aria-expanded="false">
-				<p class="m-0">
-					<i class="fa-light fa-box"></i>
+				<p class="m-0 d-flex justify-content-start align-items-center">
+					<i class="fa-light fa-box text-center" style="width: 30px;"></i>
 					<span>Termékek</span>
 				</p>
 			</button>
@@ -36,7 +36,7 @@
 
 		<li class="sidebar-item {{ this.page.title == 'Profil' ? 'active' }}">
 			<a href="{{ 'profil'|page }}" class='sidebar-link'>
-				<i class="fa-light fa-user"></i>
+				<i class="fa-light fa-user text-center" style="width: 30px;"></i>
 				<span>Profil</span>
 			</a>
 		</li>

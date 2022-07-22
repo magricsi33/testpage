@@ -62,26 +62,26 @@ function onStart()
 											Ft
 										</h4>
 									</div>
-									<p class="text-secondary">
+									<!-- <p class="text-secondary">
 										{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
 										Ft + ÁFA
-									</p>
+									</p> -->
 									{% elseif user and user.discounts %}
 									<h4 class="prim mb-0">
 										{{ product.getItemPrice(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
 										Ft
 									</h4>
-									<p class="text-secondary">
+									<!-- <p class="text-secondary">
 										{{ product.getItemPriceNetto(null, null, true, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
 										Ft + ÁFA
-									</p>
+									</p> -->
 									{% else %}
 									<h4 class="prim mb-0">
 										{{ product.price_brutto|number_format(0, ',', ' ') }} Ft
 									</h4>
-									<p class="text-secondary">
+									<!-- <p class="text-secondary">
 										{{ product.price|number_format(0, ',', ' ') }} Ft + ÁFA
-									</p>
+									</p> -->
 									{% endif %}
 								</div>
 							</div>

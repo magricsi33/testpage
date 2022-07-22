@@ -1,0 +1,33 @@
+columns:
+    id:
+        label: id
+        type: number
+        invisible: true
+    postcode:
+        label: postcode
+        type: number
+        searchable: true
+        sortable: true
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    latitude:
+        label: latitude
+        type: text
+        invisible: false
+        sortable: false
+    longitude:
+        label: longitude
+        type: text
+        invisible: false
+        sortable: false
+    created_at:
+        label: created_at
+        type: datetime
+        sortable: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true

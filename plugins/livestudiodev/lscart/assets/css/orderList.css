@@ -1,0 +1,22 @@
+.attention-button {
+  color: #000 !important;
+  background-color: yellow;
+  animation: flashing 1s linear infinite;
+  z-index: 10000;
+  position: relative;
+  pointer-events: fill;
+}
+
+.attention-button.attention-severe {
+  background-color: red;
+}
+
+.td-noclick {
+  pointer-events: none;
+}
+
+@keyframes flashing {
+  50% {
+    opacity: 0.25;
+  }
+}

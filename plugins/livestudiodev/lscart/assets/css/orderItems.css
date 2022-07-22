@@ -1,0 +1,71 @@
+.addnewitembox {
+  width: 12%;
+  min-height: 300px;
+  margin-right: 0.5%;
+  margin-bottom: 20px;
+  max-height: max-content;
+  background-color: white;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all ease-in-out 250ms;
+}
+
+.addnewitembox p {
+  width: 100%;
+  text-align: center;
+}
+
+.addnewitembox:hover {
+  background-color: #78a1ba;
+  color: white;
+  cursor: pointer;
+}
+
+.itembox {
+  width: 12%;
+  min-height: 300px;
+  margin-right: 0.5%;
+  margin-bottom: 20px;
+  max-height: max-content;
+  background-color: white;
+  text-align: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  position: relative;
+}
+
+.itembox .buttons {
+  display: flex;
+  position: absolute;
+  top: 5px;
+  right: 7px;
+}
+
+.itembox button {
+  outline: none;
+  border: none;
+}
+
+.itembox .buttons .edit-hbtn {
+  color: darkcyan;
+  background-color: white;
+}
+
+.itembox .buttons .del-hbtn {
+  color: darkred;
+  background-color: white;
+}
+
+table.table.data tbody tr:nth-child(even).bg-success td, table.table.data tbody tr:nth-child(even).bg-success th {
+    background-color: #dff0d8;
+}
+
+table.table.data tbody tr:nth-child(even).bg-info td, table.table.data tbody tr:nth-child(even).bg-info th {
+  background-color: #d9edf7;
+}

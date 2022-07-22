@@ -4,10 +4,10 @@
         {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }}
     </h2>
-    <p class="text-secondary">
+    <!-- <p class="text-secondary">
         {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }} + ÁFA
-    </p>
+    </p> -->
 </del>
 <br />
 <p class="mb-0 text-success mt-3">{{ empDiscount.name }}, -{{ empDiscount.value }}%</p>
@@ -15,20 +15,20 @@
     {{ product.getItemPrice(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }}
 </h2>
-<p class="text-secondary">
+<!-- <p class="text-secondary">
     {{ product.getItemPriceNetto(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }} + ÁFA
-</p>
+</p> -->
 {% elseif not user and product.isDiscounted %}
 <del>
     <h2 class="prim mb-0">
         {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }}
     </h2>
-    <p class="text-secondary">
+    <!-- <p class="text-secondary">
         {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }} + ÁFA
-    </p>
+    </p> -->
 </del>
 <br />
 <p class="prim mb-0 mt-3">{{ discount.name }}: -{{ discount.discount }}%</p>
@@ -36,10 +36,10 @@
     {{ product.getItemPrice(variant_id, null, true, null, null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }}
 </h2>
-<p class="text-secondary">
+<!-- <p class="text-secondary">
     {{ product.getItemPriceNetto(variant_id, null, true, null, null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }} + ÁFA
-</p>
+</p> -->
 {% else %}
 {% if product.isDiscounted %}
 <del>
@@ -47,10 +47,10 @@
         {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }}
     </h2>
-    <p class="text-secondary">
+    <!-- <p class="text-secondary">
         {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }} + ÁFA
-    </p>
+    </p> -->
 </del>
 <br />
 {% if empDiscount is not null and empDiscount|length > 0 %}
@@ -62,19 +62,19 @@
     {{ product.getItemPrice(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }}
 </h2>
-<p class="text-secondary">
+<!-- <p class="text-secondary">
     {{ product.getItemPriceNetto(variant_id, null, false, null, user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }} + ÁFA
-</p>
+</p> -->
 {% else %}
 <h2 class="prim mb-0 font-weight-bold">
     {{ product.getItemPrice(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }}
 </h2>
-<p class="text-secondary">
+<!-- <p class="text-secondary">
     {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id, false, false, false)|number_format(0, ',', ' ') }}
     {{ cart.cart.currency.shortcode }} + ÁFA
-</p>
+</p> -->
 {% endif %}
 
 {% if product.isDiscounted %}
@@ -86,11 +86,11 @@
         {{ product.getItemPrice(variant_id, cart.cart.currency.id,true, null , user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }}
     </h2>
-    <small>
+    <!-- <small>
         Nettó ár:
         {{ product.getItemPriceNetto(variant_id, cart.cart.currency.id,true, null , user and user.discounts ? user.discounts : null)|number_format(0, ',', ' ') }}
         {{ cart.cart.currency.shortcode }} + ÁFA
-    </small>
+    </small> -->
     {% endif %}
 </div>
 

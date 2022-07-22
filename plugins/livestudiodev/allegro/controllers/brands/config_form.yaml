@@ -1,0 +1,10 @@
+name: Brands
+form: $/livestudiodev/allegro/models/brand/fields.yaml
+modelClass: LivestudioDev\Allegro\Models\Brand
+defaultRedirect: livestudiodev/allegro/brands
+create:
+    redirect: 'livestudiodev/allegro/brands/update/:id'
+    redirectClose: livestudiodev/allegro/brands
+update:
+    redirect: livestudiodev/allegro/brands
+    redirectClose: livestudiodev/allegro/brands

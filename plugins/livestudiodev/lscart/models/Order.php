@@ -2,7 +2,11 @@
 
 use Model;
 use LivestudioDev\Lscart\Models\Settings;
+use LivestudioDev\Lscart\Models\OrderItem;
+use LivestudioDev\Lscart\Models\Product;
 use Event;
+use DB;
+use stdClass;
 
 /**
  * Model

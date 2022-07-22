@@ -1,0 +1,10 @@
+name: Partnerek
+form: $/livestudiodev/allegro/models/partner/fields.yaml
+modelClass: LivestudioDev\Allegro\Models\Partner
+defaultRedirect: livestudiodev/allegro/partnerek
+create:
+    redirect: 'livestudiodev/allegro/partnerek/update/:id'
+    redirectClose: livestudiodev/allegro/partnerek
+update:
+    redirect: livestudiodev/allegro/partnerek
+    redirectClose: livestudiodev/allegro/partnerek

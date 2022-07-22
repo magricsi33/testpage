@@ -1,0 +1,50 @@
+<div class="col-lg-12 text-center">
+    <div class="scoreboard">
+        <div data-control="toolbar" style="display: flex;justify-content: center;">
+            <div class="col-lg-2">
+                <div class="scoreboard-item title-value">
+                    <h4>Rekordok száma</h4>
+                    <p class="positive"><?= $vars['allcount'] ?></p>
+                    <p class="description">Ezen a héten eddig: <?= $vars['thisweekcount'] ?></p>
+                </div>
+            </div>
+    
+            <div class="col-lg-2">
+                <h4>Keresési számok</h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                    <ul>
+                        <li data-color="#95b753">Termék <span><?= $vars['searches_product'] ?></span></li>
+                        <li data-color="#e5a91a">Szó <span><?= $vars['searches_word'] ?></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <h4>Legkeresettebb termékek</h4>
+                <div class="scoreboard-item control-chart" data-control="chart-bar">
+                    <ul>
+                        <?php
+                        foreach ($vars['most_searched_product'] as $key => $value) {
+                        ?>
+                        <li data-color="<?= $vars['colors'][$key] ?>"><?= $value->product->name ?><span><?= $value->total ?></span></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <h4>Legkeresettebb szavak</h4>
+                <div class="scoreboard-item control-chart" data-control="chart-bar">
+                    <ul>
+                        <?php
+                        foreach ($vars['most_searched_word'] as $key => $value) {
+                        ?>
+                        <li data-color="<?= $vars['colors'][$key] ?>"><?= $value->searchword ?><span><?= $value->total ?></span></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?= $this->listRender() ?>

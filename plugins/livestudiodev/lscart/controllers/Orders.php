@@ -4,6 +4,11 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use LivestudioDev\Lscart\Classes\ShipExportDriver;
 use LivestudioDev\Lscart\Models\Order;
+use LivestudioDev\Lscart\Models\Product;
+use Illuminate\Support\Facades\Input;
+use LivestudioDev\Lscart\Models\Cart;
+use LivestudioDev\Lscart\Models\CartItem;
+use Renatio\DynamicPDF\Classes\PDF;
 
 class Orders extends Controller
 {
@@ -14,8 +19,18 @@ class Orders extends Controller
 
     public function __construct()
     {
+        $this->addCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css','5.14.0');
+        $this->addCss('/plugins/livestudiodev/lscart/assets/css/orderItems.css','1.0.0');
+        $this->addCss('/plugins/livestudiodev/lscart/assets/css/orderList.css','1.0.0');
+
         parent::__construct();
         BackendMenu::setContext('LivestudioDev.Lscart', 'main-menu-item2');
+    }
+
+    public function pdf($id)
+    {
+        $data["order"] = Order::where('id',$id)->first()->toArray();
+        return PDF::loadTemplate('livestudiodev.allegro::pdf.order', $data)->download($data["order"]["order_number"].'_'.$data["order"]["name"].'.pdf');
     }
 
     public function onShippingExport()
@@ -31,6 +46,8 @@ class Orders extends Controller
 
         return $this->makePartial('action_popup');
     }
+
+
 
     public function onDoMultiAction()
     {

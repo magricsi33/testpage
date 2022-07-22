@@ -1,0 +1,39 @@
+columns:
+    id:
+        label: Azonosító
+        type: number
+        invisible: false
+        sortable: true
+    name:
+        label: Név
+        type: text
+        searchable: true
+        sortable: true
+    email:
+        label: E-mail
+        type: text
+        searchable: true
+        sortable: true
+    phone:
+        label: Telefonszám
+        type: text
+    callback:
+        label: Visszahívás
+        type: text
+        invisible: true
+        sortable: true
+    message:
+        label: message
+        type: text
+        invisible: true
+    product_id:
+        label: product_id
+        type: number
+        invisible: true
+    created_at:
+        label: 'Berékezés dátuma'
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true

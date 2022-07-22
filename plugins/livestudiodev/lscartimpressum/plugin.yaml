@@ -1,6 +1,0 @@
-plugin:
-    name: 'livestudiodev.lscartimpressum::lang.plugin.name'
-    description: 'livestudiodev.lscartimpressum::lang.plugin.description'
-    author: LivestudioDev
-    icon: oc-icon-briefcase
-    homepage: ''

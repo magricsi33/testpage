@@ -29,9 +29,44 @@ function onStart() {
     }
 
     $this['conjuncture'] = json_encode($out);
+
 }
 ?>
 ==
+<div class="text-white">
+
+    {% set minDay = 0 %}  
+    {% set maxTime = '00:00' %}    
+
+    {% for item in cart.cart.items %}
+        {% set product = item.product %}
+
+        {% set minDay = max([product.category.min_day]) %} 
+
+        {% if product.category.max_time %}
+            {% set maxTime = min([product.category.max_time|date("H:i", "Europe/Budapest")]) %} 
+        {% endif %} 
+
+    {% endfor %}
+
+    {% set day = 'now'|date_modify("+ #{minDay} day") %}
+
+    {% if minDay > 1 %}
+        {% set time = 'korlátlan' %}
+    {% else %}
+        {% set time = maxTime %}
+    {% endif %}
+
+    {% if time != 'korlátlan' %}
+        {% if 'now'|date('H:i')|date("H:i", "Europe/Budapest") > time|date('H:i') %}
+            {% set day = 'now'|date_modify("+ #{minDay + 1 } day") %}
+            {% set time = 'korlátlan' %}
+        {% else %}
+    {% endif %}
+
+    {% endif %}
+</div>
+
 <div class="section position-relative" id="checkout-page">
     <div class="container pb-5">
         <div class="row">
@@ -53,7 +88,7 @@ function onStart() {
                                 </div>
                                 <div class="card-body">
                                     <div id="billingData">
-                                        {% partial 'cart/billings' %}
+                                        {% partial 'cart/billings' time=time day=day %}
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +129,7 @@ function onStart() {
                         </div>
                         <div class="col-lg-4">
                             <div id="checkout">
-                                {% partial 'cart/checkout' %}
+                                {% partial 'cart/checkout' time=time day=day minDay=minDay maxTime=maxTime %}
                             </div>
                         </div>
                     </div>
@@ -112,35 +147,6 @@ function onStart() {
 </div>
 {% put scripts %}
 <script>
-
-    let cartitems = {{ conjuncture|raw }};
-    let out = [];
-    cartitems.forEach(item => {
-        oi = new Object;
-        oi.item_id = item.id;
-        oi.item_name = item.name;
-        oi.price = parseInt(item.price);
-        oi.quantity = parseInt(item.quantity);
-        if(item.variant) {
-            oi.variant = item.variant;
-        }
-        out.push(oi);
-    });
-    
-    console.log(out);
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-        event: 'checkout',
-        ecommerce: {
-            // currencyCode: 'HUF',
-            checkout: {
-                actionField: {step: 1 },
-            },
-            products: out
-        }
-    });
-
     $(document).on("change", "#shipping_methods input", function () {
         let id = $(this).val();
 

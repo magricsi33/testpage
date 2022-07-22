@@ -1,0 +1,26 @@
+fields:
+    name:
+        label: 'Beküldő Neve'
+        span: auto
+        type: text
+    email:
+        label: 'Beküldő E-mail címe'
+        span: auto
+        type: text
+    phone:
+        label: 'Beküldő Telefonszáma'
+        span: auto
+        type: text
+    callback:
+        label: 'Visszahívást Kért-e?'
+        span: auto
+        type: switch
+    message:
+        label: Üzenet
+        size: giant
+        span: auto
+        type: textarea
+    partial1:
+        span: right
+        path: $/livestudiodev/allegro/partials/_productview.htm
+        type: partial

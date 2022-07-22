@@ -6,7 +6,19 @@ fields:
     active:
         label: 'Aktív kategória'
         span: auto
+        default: 1
         type: switch
+    max_time:
+        label: 'Maximum rendelési idő'
+        mode: time
+        span: auto
+        type: datepicker
+        commentAbove: 'Add hány óráig tudják leadni a rendeléseket'
+    min_day:
+        label: 'Minimum rendelési intervallum'
+        span: auto
+        type: text
+        commentAbove: 'Add meg hány nappal hamarabb kell megrendelni a termékekekt.'
     description:
         label: 'Kategória leírása'
         size: huge

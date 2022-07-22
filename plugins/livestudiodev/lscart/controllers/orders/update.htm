@@ -10,6 +10,7 @@
     <?= Form::open(['class' => 'layout']) ?>
 
         <div class="layout-row">
+            <a href="<?= Backend::url('livestudiodev/lscart/orders/pdf/'. $this->vars["formModel"]->id) ?>" class="btn btn-primary oc-icon-download" style="float:right; margin-bottom:10px">Szállítólevél letöltése</a>
             <?= $this->formRender() ?>
         </div>
 

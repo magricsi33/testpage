@@ -6,6 +6,7 @@ use Model;
 use Event;
 use Session;
 use Cookie;
+use stdClass;
 use LivestudioDev\Lscart\Models\CartItem;
 use LivestudioDev\Lscart\Models\Order;
 use LivestudioDev\Lscart\Models\OrderItem;
@@ -92,6 +93,9 @@ class Cart extends Model
         } else {
             $coconut = $lastord->order_number;
         }
+
+        $this->isorder = 1;
+
         $settings = Settings::instance();
 
         $onum = intval($coconut);
@@ -159,6 +163,18 @@ class Cart extends Model
         $this->regenerateSessionId();
 
         return $order;
+    }
+
+    public function afterUpdate()
+    {
+        if($this->isorder = 1) {
+            Event::fire('lscart.order.afterupdate', $this->id);
+        }
+    }
+
+    public function scopeOrder($query)
+    {
+        return $query->where('isorder',1);
     }
 
     public static function boot()
@@ -421,4 +437,5 @@ class Cart extends Model
         $this->cachedTotals      = null;
         $this->cachedListItems   = null;
     }
+
 }

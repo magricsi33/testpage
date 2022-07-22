@@ -1,0 +1,12 @@
+list: $/livestudiodev/allegro/models/package/columns.yaml
+modelClass: LivestudioDev\Allegro\Models\Package
+title: Csomagok
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'livestudiodev/allegro/csomagok/update/:id'

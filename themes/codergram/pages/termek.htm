@@ -12,24 +12,14 @@ redirect = "belepes"
 <?php
 use LivestudioDev\Lscart\Models\Product;
 use LivestudioDev\Lscart\Models\Discount;
-use LivestudioDev\Lscartreviews\Models\ProductReview;
 use Livestudiodev\Bakonyiklima\Models\Offer;
 
 function onStart()
 {
     $product = Product::whereSlug($this->param('slug'))->first();
-    $reviews = ProductReview::where('product_id', $product->id)->where('accepted', 1)->get();
     $avg = 0;
 
-    if(count($reviews) > 0) {
-        foreach($reviews as $review) {
-            $avg += $review->star;
-        }
-        $avg = $avg / count($reviews);
-    }
-
     $this['avg'] = $avg;
-    $this['reviews'] = $reviews;
 
     $json_product = new StdClass;
     $json_product->id = $product->id;
@@ -131,7 +121,7 @@ function onSendOffer()
                 <div class="d-flex flex-column flex-md-row">
                     <div class="d-flex flex-column prod-images-list mr-3">
                         <div class="mb-3">
-                            <img src="{{ product.image.path }}" 
+                            <img src="{{ product.image.path|resize(500, false, {mode: 'crop'}) }}" 
                             height="500"
                             class="active" 
                             alt="{{ product.image.description }}" title="{{ product.image.title }}" />

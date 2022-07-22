@@ -1,0 +1,25 @@
+title = "Allegro rendelés"
+layout = "livestudiodev.allegro::pdf.layouts.default"
+description = "Allegro order template"
+size = "a4"
+orientation = "portrait"
+==
+<h2>Szállítólevél</h2>
+<ul>
+    <li>E-mail: {{ order.email }}</li>
+    <li>Neve: {{ order.name|ucfirst }}</li>
+    <li>Címe: {{ order.address.zip }} {{ order.address.city|ucfirst }} {{ order.address.address|ucfirst }}</li>
+    <li>Cégnév: {{ order.address.company }}</li>
+    <li>Telefonszáma: {{ order.address.phone }}</li>
+    <li>Leadásának ideje: {{ order.created_at|date("Y. F d") }}</li>
+</ul>
+<hr>
+<h3>Rendelt termékek</h3>
+<ul class="productlist">
+    {% for item in order.items %}
+    {% set product = item.product %}
+        <li class="product">
+            {{ product.name }} x {{ item.quantity }}
+        </li>
+    {% endfor %}
+</ul>

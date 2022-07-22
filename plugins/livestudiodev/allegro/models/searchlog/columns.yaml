@@ -1,0 +1,23 @@
+columns:
+    id:
+        label: Azonosító
+        type: number
+        sortable: true
+    searchword:
+        label: 'Keresett szó'
+        type: text
+        searchable: true
+    product_id:
+        label: 'Keresett termék'
+        type: number
+        sortable: true
+        select: name
+        relation: product
+    created_at:
+        label: 'Keresés dátuma'
+        type: datetime
+        sortable: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true

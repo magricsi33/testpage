@@ -165,3 +165,12 @@
     - builder_table_update_livestudiodev_lscart_payment_methods_4.php
 1.1.0:
     - 'Added short documentation and fixed issues'
+1.1.1:
+    - 'Updated table livestudiodev_lscart_carts'
+    - builder_table_update_livestudiodev_lscart_carts_3.php
+1.1.2:
+    - 'Updated table livestudiodev_lscart_categories'
+    - builder_table_update_livestudiodev_lscart_categories.php
+1.1.3:
+    - 'Updated table livestudiodev_lscart_categories'
+    - builder_table_update_livestudiodev_lscart_categories_2.php

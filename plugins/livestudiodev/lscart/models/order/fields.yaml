@@ -15,14 +15,6 @@ fields:
         showSearch: true
         span: auto
         type: dropdown
-    lang:
-        label: Nyelv
-        options:
-            hu: Magyar
-            en: Angol
-        span: auto
-        type: balloon-selector
-        commentAbove: 'Használt nyelv amikor a rendelés le volt adva'
     order_number:
         label: 'Rendelés száma'
         span: auto
@@ -31,6 +23,11 @@ fields:
         label: 'Megrendelő neve'
         span: auto
         type: text
+    'infos[note]':
+        label: Megjegyzés
+        size: tiny
+        span: full
+        type: textarea
 tabs:
     fields:
         'billing_address[postcode]':
@@ -123,11 +120,14 @@ tabs:
             path: $/livestudiodev/lscart/partials/_orderitems.htm
             type: partial
             tab: 'Rendelt termékek'
-        'infos[note]':
-            label: Megjegyzés
-            size: large
-            span: full
-            type: textarea
+        lang:
+            label: Nyelv
+            options:
+                hu: Magyar
+                en: Angol
+            span: auto
+            type: balloon-selector
+            commentAbove: 'Használt nyelv amikor a rendelés le volt adva'
             tab: Egyéb
         osszegzes:
             span: full

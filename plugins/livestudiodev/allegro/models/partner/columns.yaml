@@ -1,0 +1,15 @@
+columns:
+    name:
+        label: 'Partner neve'
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: 'Partner leírása'
+        type: text
+        sortable: false
+    url:
+        label: 'Partner link'
+        type: text
+        searchable: true
+        sortable: true

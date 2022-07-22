@@ -1,0 +1,10 @@
+name: Kerdesek
+form: $/livestudiodev/allegro/models/question/fields.yaml
+modelClass: LivestudioDev\Allegro\Models\Question
+defaultRedirect: livestudiodev/allegro/kerdesek
+create:
+    redirect: 'livestudiodev/allegro/kerdesek/update/:id'
+    redirectClose: livestudiodev/allegro/kerdesek
+update:
+    redirect: livestudiodev/allegro/kerdesek
+    redirectClose: livestudiodev/allegro/kerdesek

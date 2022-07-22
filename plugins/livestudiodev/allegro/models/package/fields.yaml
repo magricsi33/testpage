@@ -1,0 +1,56 @@
+fields:
+    name:
+        label: 'Csomag neve'
+        span: auto
+        type: text
+    image:
+        label: 'Csomag képe'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: png
+        span: auto
+        type: fileupload
+    active:
+        label: Aktív
+        span: auto
+        type: switch
+    description:
+        label: 'Csomag leírása'
+        size: ''
+        span: full
+        type: textarea
+    tables:
+        label: 'Termék Táblák'
+        prompt: 'Adjon hozzá terméktáblát'
+        span: full
+        type: repeater
+        form:
+            fields:
+                name:
+                    label: Megnevezés
+                    span: full
+                    type: text
+                products:
+                    label: Termékek
+                    prompt: 'Adjon hozzá terméket'
+                    span: full
+                    type: repeater
+                    form:
+                        fields:
+                            product:
+                                label: Termék
+                                nameFrom: name
+                                descriptionFrom: description
+                                span: left
+                                type: relation
+                            quantity:
+                                label: Mennyiség
+                                span: auto
+                                default: '1'
+                                type: number
+    slug:
+        label: slug
+        span: auto
+        type: text

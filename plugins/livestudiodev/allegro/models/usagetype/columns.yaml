@@ -1,0 +1,19 @@
+columns:
+    id:
+        label: Azonosító
+        type: number
+        sortable: true
+    name:
+        label: Megnevezés
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: 'Keresőbarát név'
+        type: text
+        searchable: true
+        sortable: true
+    active:
+        label: Aktív
+        type: text
+        sortable: true

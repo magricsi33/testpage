@@ -8,13 +8,13 @@
                 {{ cart.totalNetto(false, true, null)|number_format(0, ',', ' ') }} {{ cart.cart.currency.shortcode }}
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td class="order-0 border-0 color-dark">ÁFA:</td>
             <td class="font-weight-bold border-0 text-right lead color-dark">
                 {{ (cart.totalBrutto(false, true) - cart.totalNetto(false, true))|number_format(0, ',', ' ') }}
                 {{ cart.cart.currency.shortcode }}
             </td>
-        </tr>
+        </tr> -->
         {% if cart.cart.coupon %}
         <tr>
             <td class="font-weight-bold border-0">Kupon</td>

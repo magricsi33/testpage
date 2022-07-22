@@ -1,0 +1,10 @@
+name: Csomagok
+form: $/livestudiodev/allegro/models/package/fields.yaml
+modelClass: LivestudioDev\Allegro\Models\Package
+defaultRedirect: livestudiodev/allegro/csomagok
+create:
+    redirect: 'livestudiodev/allegro/csomagok/update/:id'
+    redirectClose: livestudiodev/allegro/csomagok
+update:
+    redirect: livestudiodev/allegro/csomagok
+    redirectClose: livestudiodev/allegro/csomagok

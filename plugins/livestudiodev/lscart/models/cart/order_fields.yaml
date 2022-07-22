@@ -1,0 +1,98 @@
+fields:
+    email:
+        label: 'E-mail Cím'
+        span: auto
+        type: text
+    status:
+        label: 'Rendelés Státusza'
+        options:
+            - Beérkezett
+            - Feldolgozott
+            - Számlázás
+            - Elutasítva
+            - Folyamatban
+            - 'Beérkezett és fizetve'
+            - Vélemény
+            - Kész
+            - Szállítva
+        showSearch: true
+        span: auto
+        type: dropdown
+    order_number:
+        label: 'Rendelés száma'
+        span: auto
+        type: text
+    name:
+        label: 'Megrendelő neve'
+        span: auto
+        type: text
+    created_at:
+        label: 'Leadás dátuma'
+        mode: datetime
+        span: auto
+        type: datepicker
+tabs:
+    fields:
+        'address[postcode]':
+            label: Irányítószám
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[address_name]':
+            label: 'Közterület neve'
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[address_type]':
+            label: 'Közterület jellege'
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[city]':
+            label: Város
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[flat_number]':
+            label: Házszám
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[floor]':
+            label: Emelet
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[door_num]':
+            label: Ajtó
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[phone]':
+            label: Telefonszám
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[tax_number]':
+            label: Adószám
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        'address[company]':
+            label: Cégnév
+            span: auto
+            type: text
+            tab: 'Számlázási cím'
+        items:
+            span: full
+            path: $/livestudiodev/lscart/controllers/orders/_orderitems.htm
+            containerAttributes:
+                id: orderItemTab
+            type: partial
+            tab: 'Rendelt termékek'
+        'extras[note]':
+            label: Megjegyzés
+            size: huge
+            span: full
+            type: textarea
+            tab: Egyéb

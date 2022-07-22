@@ -8,10 +8,104 @@ security = "all"
 <?php
 use LivestudioDev\Lscart\Models\Product;
 use LivestudioDev\Lscart\Models\Category;
+use Codergram\Novak\Models\Notification;
+use RainLab\User\Facades\Auth;
+
 function onStart()
 {
     $this['srdata'] = Product::select('id','name','slug','category_id')->where('status', '<>', 0)->with('image')->with('category:id,name,slug')->get();
     $this['fcategories'] = Category::whereNull('parent_id')->where('active',  1)->with('children')->get();
+
+    $user = Auth::user();
+
+    if ($user) {
+        $notifications = Notification::where('user_id', $user->id)->get();
+
+        $this['notiNews'] = $notifications->where('saw', 0);
+        $this['notiOlds'] = $notifications->where('saw', 1);
+
+        $profilStatus = 0;
+
+        if ($user->billing_name) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_email) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_phone) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_zip) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_city) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_address) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_address_type) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_house_number) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_floor) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_door) {
+            $profilStatus += 1;
+        }
+        if ($user->billing_company_number) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_name) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_zip) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_city) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_address) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_address_type) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_house_number) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_floor) {
+            $profilStatus += 1;
+        }
+        if ($user->trans_door) {
+            $profilStatus += 1;
+        }
+
+        $profilPercentage = ($profilStatus / 19) * 100;
+        $this['profilPercentage'] = $profilPercentage;
+
+    }
+
+
+}
+
+function onSawNoti() {
+    $input = collect(Input::all());
+    $notification = Notification::findOrFail($input->get('noti_id'));
+    $notification->saw = true;
+
+    if ($notification->save()) {
+        Flash::success("ok");
+
+        return Redirect::to("/");
+        
+    } else {
+        Flash::error("Valami hiba törént, kérjük próbáld újra!");
+    }    
+
 }
 ?>
 ==
@@ -59,6 +153,20 @@ function onStart()
             {% partial 'site/footer' %}
 
         </div>
+        {% if notiNews|length > 0 %}
+            <div class="sideNoti">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <strong class="me-auto text-dark"><i class="fa-solid fa-bell me-1 text-dark"></i> Értesítések</strong>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Önnek <span class="fw-bold">{{ notiNews|length }}</span> olvasatlan üzenete van!
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
     </div>
 
     <!-- Scripts -->
