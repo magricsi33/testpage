@@ -41,10 +41,10 @@ function onStart() {
     {% for item in cart.cart.items %}
         {% set product = item.product %}
 
-        {% set minDay = max([product.category.min_day]) %} 
+        {% set minDay = max([product.category.min_day, minDay]) %} 
 
         {% if product.category.max_time %}
-            {% set maxTime = min([product.category.max_time|date("H:i", "Europe/Budapest")]) %} 
+            {% set maxTime = min([product.category.max_time|date("H:i", "Europe/Budapest"), maxTime]) %} 
         {% endif %} 
 
     {% endfor %}

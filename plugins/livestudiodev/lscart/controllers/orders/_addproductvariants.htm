@@ -1,0 +1,9 @@
+<div class="form-group">
+	<label>Változat / Variáns</label>
+	<select class="form-control custom-select" name="variant_id">
+		<?php
+		foreach($variants as $variant) { ?>
+		<option value="<?= $variant->id ?>"><?= $variant->name ?></option>
+		<?php } ?>
+	</select>
+</div>

@@ -1,0 +1,45 @@
+<div class="product-list" id="orderProductList" style="display:flex;flex-wrap:wrap;">
+	<?php 
+	if(isset($this->vars["formModel"])){
+		$items = $this->vars["formModel"]->items;
+	}
+	foreach($items as $item) { 
+		$product = $item->product;
+		$variant = $item->variant;
+	?>
+	<div class="itembox">
+		<div class="buttons">
+			<button class="edit-hbtn" data-control="popup" data-handler="onEditOrderItemPopup" data-request-data='orderid: <?= $vars["formModel"]->id ?>,itemid: <?= $item->id ?>'>
+				<i class="fas fa-edit"></i>
+			</button>
+			<button class="del-hbtn" data-request="onRemoveOrderItem" data-request-data='orderid: <?= $vars["formModel"]->id ?>,itemid: <?= $item->id ?>'>
+				<i class="fas fa-times"></i>
+			</button>
+		</div>
+		<?php if($product && $product->image){
+			echo "<img src='".$product->image->path."' alt='' style='max-height:250px;max-width:100%'>";
+		}else {
+			$noimage = \Url::to('storage/app/media/noimage.png');
+			$noimage_self = \Url::to('plugins/livestudiodev/lscart/assets/images/noimage.png');
+			echo "<img src='".$noimage_self."' alt='' style='height:250px;max-width:100%;object-fit:contain;object-position:center'>";
+		}
+		?>
+		<h4 style="font-weight:bold;">
+			<?= $product ? $product->name : 'Törölt termék' ?>
+		</h4>
+		<?php if($variant){ ?>
+		<p style="font-weight: bold;">
+			Változat: <?= $variant ? $variant->name : '' ?>
+		</p>
+		<?php } ?>
+		<p style="font-weight: bold;">
+			Mennyiség: <?= $item->quantity ?> <?= $item->product ? $item->product->unit->name : 'db' ?>
+		</p>
+	</div>
+	<?php } ?>
+	<button class="addnewitembox" data-control="popup" data-handler="onAddNewOrderItemPopup" data-request-data="orderid: <?= $vars['formModel']->id ?>">
+		<p>
+			<i class="fas fa-plus" style="font-size:60px;"></i>
+		</p>
+	</button>
+</div>

@@ -4,6 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use LivestudioDev\Lscart\Classes\ShipExportDriver;
 use LivestudioDev\Lscart\Models\Order;
+use LivestudioDev\Lscart\Models\OrderItem;
 use LivestudioDev\Lscart\Models\Product;
 use Illuminate\Support\Facades\Input;
 use LivestudioDev\Lscart\Models\Cart;
@@ -29,8 +30,126 @@ class Orders extends Controller
 
     public function pdf($id)
     {
-        $data["order"] = Order::where('id',$id)->first()->toArray();
+        $data["order"] = Order::where('id',$id)->first();
         return PDF::loadTemplate('livestudiodev.allegro::pdf.order', $data)->download($data["order"]["order_number"].'_'.$data["order"]["name"].'.pdf');
+    }
+
+    public function onAddNewOrderItemPopup()
+    {
+        $this->vars["products"] = Product::where('status','<>',0)->get();
+        $this->vars["orderid"] = \Input::get('orderid');
+        return $this->makePartial('addneworderitem_popup');
+    }
+
+    public function onEditOrderItemPopup()
+    {
+        $this->vars["orderid"] = \Input::get('orderid');
+        $this->vars["itemid"] = \Input::get('itemid');
+        $this->vars["item"] = OrderItem::find(\Input::get('itemid'));
+        return $this->makePartial('editorderitem_popup');
+    }
+
+    public function onRefreshVariants()
+    {
+        $vars = Product::where('id',\Input::get('product_id'))->first()->variants;
+
+        if(count($vars) > 0){
+            $this->vars["variants"] = $vars;
+            return [
+                '#newItemModalVariants' => $this->makePartial('addproductvariants')
+            ];
+        }
+    }
+    public function onOrderAlertsPopup()
+    {
+        $oid = \Input::get('orderid');
+        $order = Order::find($oid);
+
+        $this->vars["orderid"] = $oid;
+        $this->vars["alerts"] = $order->alerts;
+        $this->vars['cst'] = $order->customer;
+
+        return $this->makePartial('order_alerts');
+    }
+
+    public function onAddNewOrderItem()
+    {
+        $orderid = Input::get('orderid');
+        $productid = Input::get('product_id');
+        $variantid = Input::get('variant_id');
+        $quantity = Input::get('quantity');
+        
+        $order = Order::find($orderid);
+        $product = Product::find($productid);
+
+        $i_history = [];
+
+        $oitem = $order->items()->where('product_id',$productid)->where('variant_id',$variantid)->first();
+        if(!$oitem){
+            $oitem = new OrderItem();
+            $oitem->history = $i_history; // TBD
+            $oitem->extras = null;
+            $oitem->variant_id = $variantid;
+            $oitem->product = $product;
+            $oitem->order_id = $orderid;
+            $oitem->quantity = $quantity;
+        }else {
+            $oitem->quantity += $quantity;
+        }
+        $oitem->save();
+        $order->items()->add($oitem);
+        $order->reloadRelations('items');
+
+        $this->vars['formModel'] = $order;
+        $this->vars['formContext'] = 'update';
+
+        return [
+            '#orderItemTab' => $this->makePartial('orderitems'),
+            '#orderTotalTab' => $this->makePartial('ordertotal')
+        ];
+    }
+
+    public function onEditOrderItem()
+    {
+        $itemid = Input::get('itemid');
+        $orderid = Input::get('orderid');
+
+        $quantity = Input::get('quantity');
+        
+        $order = Order::find($orderid);
+        $oitem = $order->items()->find($itemid);
+        $oitem->quantity = $quantity;
+        $oitem->save();
+
+        $order->reloadRelations('items');
+
+        $this->vars['formModel'] = $order;
+        $this->vars['formContext'] = 'update';
+
+        return [
+            '#orderItemTab' => $this->makePartial('orderitems'),
+            '#orderTotalTab' => $this->makePartial('ordertotal')
+        ];
+    }
+
+    public function onRemoveOrderItem()
+    {
+        $itemid = Input::get('itemid');
+        $orderid = Input::get('orderid');
+
+        
+        $order = Order::find($orderid);
+        $oitem = $order->items()->find($itemid);
+        $oitem->delete();
+        $order->reloadRelations('items');
+
+        $this->vars['formModel'] = $order;
+        $this->vars['formContext'] = 'update';
+
+        return [
+            '#orderItemTab' => $this->makePartial('orderitems'),
+            '#orderTotalTab' => $this->makePartial('ordertotal')
+        ];
     }
 
     public function onShippingExport()

@@ -117,7 +117,9 @@ tabs:
             tab: 'Szállítási cím / Cím'
         items:
             span: full
-            path: $/livestudiodev/lscart/partials/_orderitems.htm
+            path: $/livestudiodev/lscart/controllers/orders/_orderitems.htm
+            containerAttributes:
+                id: orderItemTab
             type: partial
             tab: 'Rendelt termékek'
         lang:
@@ -132,5 +134,7 @@ tabs:
         osszegzes:
             span: full
             path: $/livestudiodev/lscart/partials/_ordertotal.htm
+            containerAttributes:
+                id: orderTotalTab
             type: partial
             tab: Összegzés

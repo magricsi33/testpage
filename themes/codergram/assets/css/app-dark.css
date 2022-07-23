@@ -2099,7 +2099,7 @@ body.theme-dark .form-control {
     appearance: none;
     background-clip: padding-box;
     background-color: #242d36;
-    border: 1px solid #35354f;
+    border: 1px solid #666;
     border-radius: .25rem;
     color: #c2c2d9;
     display: block;

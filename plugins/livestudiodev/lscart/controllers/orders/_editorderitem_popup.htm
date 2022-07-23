@@ -1,0 +1,33 @@
+<form
+  data-request-flash
+  data-request-loading
+  data-request-data="orderid: <?= $orderid ?>,itemid: <?= $itemid ?>"
+  data-request="onEditOrderItem"
+  data-request-complete="$('.modal').modal('hide');"
+>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      &times;
+    </button>
+    <h4 class="modal-title">Termék szerkesztése.</h4>
+    <p style="color: red">A módosított termékek mennyisége a raktárkészletet nem módosítják!</p>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+        <label>Termék</label>
+        <h4><?= $item->product->name ?></h4>
+    </div>
+    <div class="form-group number-field span-full is-required">
+        <label>Mennyiség</label>
+        <input type="number" name="quantity" value="<?= $item->quantity ?>" class="form-control" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-warning">
+      Szerkesztés
+    </button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+      Mégsem
+    </button>
+  </div>
+</form>
