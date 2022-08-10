@@ -47,3 +47,9 @@ permissions:
     isDeveloper:
         tab: 'livestudiodev.lscart::lang.plugin.name'
         label: Fejlesztő-e
+    default-settings:
+        tab: default-settings
+        label: default-settings
+    payment-mode:
+        tab: payment-mode
+        label: payment-mode
