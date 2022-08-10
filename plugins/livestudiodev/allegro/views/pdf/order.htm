@@ -12,7 +12,16 @@ orientation = "portrait"
 </p>
 
 <p>
-    <strong>Megrendelő:</strong> <span>{{ order.name|ucfirst }}</span>, {{ order.address.zip }} {{ order.address.city|ucfirst }} {{ order.address.address|ucfirst }}, {{ order.address.phone }}
+    <strong>Megrendelő:</strong> <span>{{ order.name|ucfirst }}</span>, 
+    {{ order.address.postcode }} 
+    {{ order.address.city|ucfirst }} 
+    {{ order.address.address_name|ucfirst }} 
+    {{ order.address.address_type|ucfirst }} 
+
+    {{ order.address.flat_number|ucfirst }}, 
+    {{ order.address.floor|ucfirst }}
+    {{ order.address.door_num|ucfirst }} | 
+    {{ order.address.phone }}
 </p>
 
 <!-- <ul>
