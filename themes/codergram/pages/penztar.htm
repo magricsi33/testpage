@@ -152,7 +152,8 @@ function onStart() {
 
         $.request("onSetCartShipping", {
             data: {
-                shipping_mode: id
+                shipping_mode: id,
+                payment_mode: 1
             }
         });
     });

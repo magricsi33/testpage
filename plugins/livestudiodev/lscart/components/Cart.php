@@ -169,6 +169,7 @@ class Cart extends ComponentBase
     public function onSetCartShipping()
 	{
 		$this->cart->shipping_id = post('shipping_mode');
+		$this->cart->payment_id = post('payment_mode');
 		$this->cart->save();
 
 		return [

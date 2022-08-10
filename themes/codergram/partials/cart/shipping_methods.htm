@@ -5,8 +5,10 @@
     <div class="card-body">
         {% for key, item in cart.shippingMethods() %}
         <div id="shipping_methods" class="mb-3">
+
             <input type="checkbox" name="shipping_mode" class="custom-control-input" value="{{ item.id }}"
                 id="customCheck-{{key}}" {{ cart.cart.shipping.id == item.id ? 'checked' : '' }} hidden />
+
             <label class="custom-control-label px-3 w-100" for="customCheck-{{key}}">
                 <div class="row align-items-center">
                     <div class="col-lg-3">

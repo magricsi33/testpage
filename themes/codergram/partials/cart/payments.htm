@@ -3,7 +3,6 @@
 <div id="payment_methods_card" class="mb-3">
     <input type="checkbox" name="payment_mode" class="custom-control-input" id="paymentCheck-{{ key }}"
         value="{{ item.payment }}" 
-        {{ loop.first ? 'checked' : '' }}
         {{ item.payment == cart.cart.payment.id ? 'checked' : '' }} 
         hidden />
     
@@ -12,7 +11,7 @@
             <div class="col-lg-8">
                 <p class="m-0 fw-bold m-0 text-white">
                     {{ method.name }}
-                </p>   
+                </p>    
                 <div class="d-block text-secondary m-0 item-description">
                     {{ method.description|raw }}
                 </div>
