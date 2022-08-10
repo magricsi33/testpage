@@ -5,21 +5,69 @@ size = "a4"
 orientation = "portrait"
 ==
 <h2>Szállítólevél</h2>
-<ul>
+
+<p>
+    <strong>Szállító:</strong> <span>Novák Zoltán Cukrászmester</span>
+</p>
+
+<p>
+    <strong>Megrendelő:</strong> <span>{{ order.name|ucfirst }}</span>, {{ order.address.zip }} {{ order.address.city|ucfirst }} {{ order.address.address|ucfirst }}, {{ order.address.phone }}
+</p>
+
+<!-- <ul>
     <li>E-mail: {{ order.email }}</li>
     <li>Neve: {{ order.name|ucfirst }}</li>
     <li>Címe: {{ order.address.zip }} {{ order.address.city|ucfirst }} {{ order.address.address|ucfirst }}</li>
     <li>Cégnév: {{ order.address.company }}</li>
     <li>Telefonszáma: {{ order.address.phone }}</li>
     <li>Leadásának ideje: {{ order.created_at|date("Y. F d") }}</li>
-</ul>
+</ul> -->
 <hr>
 <h3>Rendelt termékek</h3>
-<ul class="productlist">
+<table>
+    <tr>
+        <th style="width: 100px; text-align: left;">Név</th>
+        <th style="width: 100px; text-align: left;">db</th>
+        <th style="width: 100px; text-align: left;">Ár</th>
+        <th style="width: 100px; text-align: left;">Össz. ár</th>
+    </tr>
     {% for item in order.items %}
     {% set product = item.product %}
-        <li class="product">
-            {{ product.name }} x {{ item.quantity }}
-        </li>
+        <tr>
+            <td style="width: 100px;">{{ product.name }}</td>
+            <td style="width: 100px;">{{ item.quantity }}</td>
+            <td style="width: 100px;">{{ product.price }} Ft</td>
+            <td style="width: 100px;">{{ product.price * item.quantity }} Ft</td>
+        </tr>
     {% endfor %}
-</ul>
+</table>
+
+<!-- <ul class="productlist">
+    <li class="product">
+        {{ product.name }} | {{ item.quantity }} | {{ product.price }} Ft | {{ product.price * item.quantity }} Ft
+    </li>
+</ul> -->
+<p>
+    <strong>Dátum: {{ order.created_at|date("Y. F d") }}</strong>
+</p>
+<p>
+    Szavatossági idő a kiszállítástól számítva tejszínes sütemények esetén 48 óra, egyéb sütemények esetén 72 óra. 
+</p>
+<p>
+    2 és 8 °C között tárolva.
+</p>
+<p>
+    Az árak az ÁFÁ-t nem tartalmazzák (18%)
+</p>
+
+<p>
+    <strong>A cukrászat a HACCP-rendszer előírásainak megfeleően működik.</strong>
+</p>
+
+<p>
+    Kiállító: ..........................................
+</p>
+
+<p>
+    Átvette: ..........................................
+</p>

@@ -13,19 +13,17 @@ tabs:
             type: dropdown
             commentAbove: 'Termék kategóriája'
             tab: Alapadatok
-        price:
-            label: 'Termék Nettó Ára'
+        status:
+            label: 'Termék státusz'
+            showSearch: true
             span: auto
-            default: '0'
-            disabled: 1
-            dependsOn:
-                - price_brutto
-            type: number
-            commentAbove: 'Árajánlatkérés esetében hagyja 0-án'
+            default: '1'
+            type: dropdown
             tab: Alapadatok
         price_brutto:
-            label: 'Termék Bruttó Ára'
+            label: 'Termék Nettó Ára'
             span: auto
+            disabled: 0
             dependsOn: {  }
             type: number
             commentAbove: 'Árajánlatkérés esetében hagyja 0-án'
@@ -48,20 +46,15 @@ tabs:
                 mode: crop
                 extension: auto
             span: auto
+            hidden: 1
             type: fileupload
             tab: Alapadatok
         slug:
             label: 'Keresőbarát név'
             span: auto
+            readOnly: 1
             type: text
             comment: 'Hagyja üresen az automatikus generáláshoz'
-            tab: Alapadatok
-        status:
-            label: 'Termék státusz'
-            showSearch: true
-            span: auto
-            default: '1'
-            type: dropdown
             tab: Alapadatok
         description:
             label: 'Termék leírás'
@@ -69,29 +62,18 @@ tabs:
             span: full
             type: richeditor
             tab: Alapadatok
-        meta_title:
-            label: Cím
+        price:
+            label: 'Termék Nettó (default) Ára'
             span: auto
-            type: text
-            commentAbove: (META)
-            tab: SEO
-        meta_description:
-            label: Leírás
-            size: ''
-            span: auto
-            type: textarea
-            commentAbove: (META)
-            tab: SEO
-        meta_keywords:
-            label: Keresőszavak
-            mode: string
-            separator: comma
-            customTags: true
-            useKey: false
-            span: auto
-            type: taglist
-            commentAbove: (META)
-            tab: SEO
+            default: '0'
+            disabled: 0
+            readOnly: 0
+            hidden: 1
+            dependsOn:
+                - price_brutto
+            type: number
+            commentAbove: 'Árajánlatkérés esetében hagyja 0-án'
+            tab: Alapadatok
         unit:
             label: Mértékegység
             nameFrom: name
@@ -105,23 +87,20 @@ tabs:
             nameFrom: name
             descriptionFrom: description
             span: auto
+            readOnly: 1
             type: relation
             commentAbove: 'Termék adókulcsa'
-            tab: Egyéb
-        stock:
-            label: 'Raktáron lévő'
-            span: auto
-            type: number
-            comment: 'Raktáron lévő termékek száma'
             tab: Egyéb
         variantonly:
             label: 'Csak a variánsok használata'
             span: auto
+            hidden: 1
             type: switch
             comment: 'Ebben az esetben az alap termék csak egy minta, és csak a variánsok használatával tehető kosárba az adott termék'
             tab: 'Változatok / Variánsok'
         variants:
             span: full
             path: $/livestudiodev/lscart/controllers/products/variants_relation.htm
+            hidden: 1
             type: partial
             tab: 'Változatok / Variánsok'
