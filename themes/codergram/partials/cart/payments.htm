@@ -2,7 +2,10 @@
 {% set method = cart.cart.shipping.getPaymentMethod(item.payment) %}
 <div id="payment_methods_card" class="mb-3">
     <input type="checkbox" name="payment_mode" class="custom-control-input" id="paymentCheck-{{ key }}"
-        value="{{ item.payment }}" {{ item.payment == cart.cart.payment.id ? 'checked' : '' }} hidden />
+        value="{{ item.payment }}" 
+        {{ loop.first ? 'checked' : '' }}
+        {{ item.payment == cart.cart.payment.id ? 'checked' : '' }} 
+        hidden />
     
     <label class="custom-control-label px-3 py-2 w-100" for="paymentCheck-{{key}}">
         <div class="row align-items-center">

@@ -4,6 +4,7 @@ description = "Novák cukrászda order template"
 size = "a4"
 orientation = "portrait"
 ==
+
 <h2>Szállítólevél</h2>
 
 <p>
@@ -28,8 +29,8 @@ orientation = "portrait"
     <tr>
         <th style="width: 100px; text-align: left;">Név</th>
         <th style="width: 100px; text-align: left;">db</th>
-        <th style="width: 100px; text-align: left;">Ár</th>
-        <th style="width: 100px; text-align: left;">Össz. ár</th>
+        <th style="width: 100px; text-align: left;">Nettó Ár</th>
+        <th style="width: 100px; text-align: left;">Össz. nettó ár</th>
     </tr>
     {% for item in order.items %}
     {% set product = item.product %}

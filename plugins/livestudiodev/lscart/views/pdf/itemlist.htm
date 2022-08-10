@@ -1,0 +1,48 @@
+title = "itemlist"
+layout = "livestudiodev.lscart::pdf.layouts.default"
+description = "Itemlist template"
+size = "a4"
+orientation = "portrait"
+==
+<h2>Tételjegyzék - ({{ start|date("Y-m-d H:i:s") }} - {{ end|date("Y-m-d H:i:s") }})</h2>
+<div class="box">
+	<h3>Termékek összesen</h3>
+	<hr>
+	<ol>
+	{% for title in allitems %}
+		<li>{{ title.item.product.name }} - {{ title.item.variant ? title.item.variant.name : ''}}: {{ title.quantity }} db</li>
+	{% endfor %}
+	</ol>
+	<hr>
+</div>
+
+<div class="box">
+	<h3>Rendelések</h3>
+	<hr>
+	<div class="cells">
+		{% for order in orders %}
+		<div class="cell">
+			<div class="info">
+				Azonosító: <b>{{ order.id }}</b> <br>
+				Rendelésszám: <b>{{ order.order_number }}</b> <br>
+				Rendelés összege: <b>{{ order.getAbsolutePrice() }}</b> <br>
+				Fizetési mód neve: <b>{{ order.payment.name }}</b> <br>
+				Telefonszám: <b>{{ order.address.phone ? order.address.phone : order.billing_address.phone }}</b> <br>
+				Megrendelö: <b>{{ order.name }}</b> <br>
+				Cím: <b>{{ order.address.postcode }} {{ order.address.city }}, {{ order.address.address_name }} {{ order.address.address_type }} {{ order.address.flat_number }}</b>
+				<br><br>
+				Rendelt termékek:
+			</div>
+			<div class="items">
+				<ol>
+					{% for oitem in order.items %}
+					<li>
+						{{ oitem.product.name }} || {{ oitem.product.getVariant(oitem.variant_id).name ?? 'Nincs változat' }} - {{ oitem.quantity }} db
+					</li>
+					{% endfor %}
+				</ol>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>

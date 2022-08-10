@@ -219,7 +219,7 @@ table {
   
 
 input.custom-control-input + label {
-    border: 1px solid transparent;
+    border: 1px solid #333;
     border-radius: 10px;
 } 
 
