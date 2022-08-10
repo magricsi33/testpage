@@ -52,7 +52,8 @@ tabs:
         slug:
             label: 'Keresőbarát név'
             span: auto
-            readOnly: 1
+            readOnly: 0
+            hidden: 1
             type: text
             comment: 'Hagyja üresen az automatikus generáláshoz'
             tab: Alapadatok

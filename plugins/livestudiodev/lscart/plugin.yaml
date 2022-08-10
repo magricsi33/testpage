@@ -14,10 +14,8 @@ navigation:
                 label: 'Általános beállítások'
                 url: livestudiodev/lscart/groupcontroller/altalanos
                 icon: icon-sitemap
-            akciozas:
-                label: Akciózás
-                url: livestudiodev/lscart/groupcontroller/akciozas
-                icon: icon-sitemap
+                permissions:
+                    - default-settings
             side-menu-item3:
                 label: Termékek
                 url: livestudiodev/lscart/products
@@ -34,6 +32,8 @@ navigation:
                 label: 'Fizetési módok'
                 url: livestudiodev/lscart/paymentmethods
                 icon: icon-credit-card
+                permissions:
+                    - payment-mode
     main-menu-item2:
         label: Rendelések
         url: livestudiodev/lscart/orders

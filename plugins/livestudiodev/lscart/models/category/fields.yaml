@@ -28,19 +28,23 @@ fields:
     section1:
         label: 'Meta információk'
         span: full
+        hidden: 1
         type: section
     meta_title:
         label: 'Meta cím'
         span: auto
+        hidden: 1
         type: text
     meta_keywords:
         label: 'Meta keresőszavak'
         span: auto
+        hidden: 1
         type: text
     meta_description:
         label: 'Meta leírás'
         size: ''
         span: full
+        hidden: 1
         type: textarea
     image:
         label: 'Kategória képe'
@@ -50,10 +54,12 @@ fields:
             mode: crop
             extension: auto
         span: auto
+        hidden: 1
         type: fileupload
         commentAbove: '(opcionális, ha nincs megadva, az első termék képét használjuk)'
     slug:
         label: 'Keresőbarát név'
         span: auto
+        hidden: 1
         type: text
         comment: 'Hagyja üresen az automatikus generáláshoz'
