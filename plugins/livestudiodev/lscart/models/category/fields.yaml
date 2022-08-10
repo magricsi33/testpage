@@ -13,12 +13,12 @@ fields:
         mode: time
         span: auto
         type: datepicker
-        commentAbove: 'Add hány óráig tudják leadni a rendeléseket'
+        commentAbove: 'Add meg hány óráig tudják leadni a rendeléseket'
     min_day:
         label: 'Minimum rendelési intervallum'
         span: auto
         type: text
-        commentAbove: 'Add meg hány nappal hamarabb kell megrendelni a termékekekt.'
+        commentAbove: 'Add meg hány nappal hamarabb kell megrendelni a termékeket.'
     description:
         label: 'Kategória leírása'
         size: huge
