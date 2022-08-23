@@ -14,7 +14,7 @@ use Renatio\DynamicPDF\Classes\PDF;
 class Orders extends Controller
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController'    ];
-    
+
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
 
@@ -78,7 +78,7 @@ class Orders extends Controller
         $productid = Input::get('product_id');
         $variantid = Input::get('variant_id');
         $quantity = Input::get('quantity');
-        
+
         $order = Order::find($orderid);
         $product = Product::find($productid);
 
@@ -115,7 +115,7 @@ class Orders extends Controller
         $orderid = Input::get('orderid');
 
         $quantity = Input::get('quantity');
-        
+
         $order = Order::find($orderid);
         $oitem = $order->items()->find($itemid);
         $oitem->quantity = $quantity;
@@ -137,7 +137,7 @@ class Orders extends Controller
         $itemid = Input::get('itemid');
         $orderid = Input::get('orderid');
 
-        
+
         $order = Order::find($orderid);
         $oitem = $order->items()->find($itemid);
         $oitem->delete();
@@ -154,19 +154,17 @@ class Orders extends Controller
 
     public function onShippingExport()
     {
-        $this->vars["checked"] = \Input::get('checked');        
+        $this->vars["checked"] = \Input::get('checked');
 
         return $this->makePartial('popup');
     }
 
     public function onMultiAction()
     {
-        $this->vars["checked"] = \Input::get('checked');        
+        $this->vars["checked"] = \Input::get('checked');
 
         return $this->makePartial('action_popup');
     }
-
-
 
     public function onDoMultiAction()
     {
@@ -188,6 +186,44 @@ class Orders extends Controller
         $ids = \Input::get('ids');
 
         return \Redirect::to(\Backend::url('livestudiodev/lscart/orders/oxport'))->with(['scheme' => $scheme, 'ids' => $ids]);
+    }
+
+    public function onSummaryPdf()
+    {
+        $checked = \Input::get('checked');
+
+        return \Redirect::to(\Backend::url('livestudiodev/lscart/orders/multipdf'))->with(['checked' => $checked]);
+    }
+
+    public function multipdf()
+    {
+        $checked = \Session::get('checked', []);
+        if(count($checked) < 1) {
+            \Flash::error('Nincs kiválasztva egyetlen rendelés sem.');
+            return \Redirect::to(\Backend::url('livestudiodev/lscart/orders'));
+        }
+
+        $orders = Order::whereIn('id',$checked)->get();
+        $products = [];
+
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                if(isset($products[$item->product_id])) {
+                    $products[$item->product_id]["totalQuantity"] += $item->quantity;
+                } else {
+                    $products[$item->product_id] = [
+                        'product' => $item->product,
+                        'totalQuantity' => $item->quantity
+                    ];
+                }
+            }
+        }
+
+        $data = [
+            'orders' => $orders,
+            'products' => $products,
+        ];
+        return PDF::loadTemplate('livestudiodev.allegro::order_multi', $data)->download('Osszegzett_fuvarlevel.pdf');
     }
 
     public function oxport()

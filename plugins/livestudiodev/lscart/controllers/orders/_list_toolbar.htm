@@ -1,5 +1,5 @@
 <div data-control="toolbar">
-    <a href="<?= Backend::url('livestudiodev/lscart/orders/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+    <!-- <a href="<?= Backend::url('livestudiodev/lscart/orders/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a> -->
     <button
         class="btn btn-default oc-icon-trash-o"
         disabled="disabled"
@@ -42,5 +42,19 @@
         data-trigger-condition="checked"
         data-stripe-load-indicator>
         Státuszváltás
+    </button>
+    <button
+        class="btn btn-default oc-icon-file-pdf-o"
+        disabled="disabled"
+        onclick="$(this).data('request-data', {
+            checked: $('.control-list').listWidget('getChecked')
+        })"
+        data-control="popup"
+        data-handler="onSummaryPdf"
+        data-trigger-action="enable"
+        data-trigger=".control-list input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-stripe-load-indicator>
+        Összegzett fuvarlevél
     </button>
 </div>

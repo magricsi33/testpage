@@ -50,7 +50,7 @@ class Order extends Model
     }
 
     public function afterUpdate()
-    {        
+    {
         // if($this->status == 1)
         // {
         //     $response = $driver->makeInvoiceFromOrder($this);
@@ -61,7 +61,7 @@ class Order extends Model
 
         //     \Flash::success('A rendelés(ek) sikeresen feldolgozásra került(ek).');
         // }
-        
+
         Event::fire('lscart.order.afterupdate', $this->id);
     }
 
@@ -89,6 +89,13 @@ class Order extends Model
             case 6:
                 return "Véleményezés";
         }
+    }
+
+    public function getNameOptions($scopes = null)
+    {
+        $names = Order::all()->lists('name','name');
+
+        return $names;
     }
 
     /**

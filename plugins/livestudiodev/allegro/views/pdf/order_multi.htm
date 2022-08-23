@@ -1,0 +1,69 @@
+title = "Novák cukrászda rendelés"
+layout = "livestudiodev.allegro::pdf.layouts.default"
+description = "Novák cukrászda order template"
+size = "a4"
+orientation = "portrait"
+==
+
+<h2>Szállítólevél</h2>
+
+<p>
+    <strong>Szállító:</strong> <span>Novák Zoltán Cukrászmester</span>
+</p>
+
+<p>
+    <strong>Megrendelő:</strong> <span>{{ orders[0].name|ucfirst }}</span>,
+    {{ orders[0].address.postcode }}
+    {{ orders[0].address.city|ucfirst }}
+    {{ orders[0].address.address_name|ucfirst }}
+    {{ orders[0].address.address_type|ucfirst }}
+
+    {{ orders[0].address.flat_number|ucfirst }},
+    {{ orders[0].address.floor|ucfirst }}
+    {{ orders[0].address.door_num|ucfirst }} |
+    {{ orders[0].address.phone }}
+</p>
+
+<hr>
+<h3>Rendelt termékek</h3>
+<table>
+    <tr>
+        <th style="width: 100px; text-align: left;">Név</th>
+        <th style="width: 100px; text-align: left;">db</th>
+        <th style="width: 100px; text-align: left;">Nettó Ár</th>
+        <th style="width: 100px; text-align: left;">Össz. nettó ár</th>
+    </tr>
+    {% for entry in products %}
+        <tr>
+            <td style="width: 100px;">{{ entry.product.name }}</td>
+            <td style="width: 100px;">{{ entry.totalQuantity }}</td>
+            <td style="width: 100px;">{{ entry.product.price }} Ft</td>
+            <td style="width: 100px;">{{ entry.product.price * entry.totalQuantity }} Ft</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<p>
+    <strong>Dátum: {{ orders[0].delivery_date|date("Y. m. d.") }}</strong>
+</p>
+<p>
+    Szavatossági idő a kiszállítástól számítva tejszínes sütemények esetén 48 óra, egyéb sütemények esetén 72 óra.
+</p>
+<p>
+    2 és 8 °C között tárolva.
+</p>
+<p>
+    Az árak az ÁFÁ-t nem tartalmazzák (18%)
+</p>
+
+<p>
+    <strong>A cukrászat a HACCP-rendszer előírásainak megfeleően működik.</strong>
+</p>
+
+<p>
+    Kiállító: ..........................................
+</p>
+
+<p>
+    Átvette: ..........................................
+</p>

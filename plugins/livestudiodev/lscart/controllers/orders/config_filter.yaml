@@ -4,6 +4,13 @@ scopes:
     type: checkbox
     default: 1
     conditions: status <> 2
+  name:
+    label: Név
+    type: group
+    options: getNameOptions
+    conditions: name in (:filtered)
+    modelClass: LivestudioDev\Lscart\Models\Order
+    emptyOption: 'Nincs'
   status:
     label: Státusz
     type: group
@@ -16,4 +23,3 @@ scopes:
     label: Leadás dátuma
     type: daterange
     conditions: created_at >= ':after' AND created_at <= ':before'
-  
