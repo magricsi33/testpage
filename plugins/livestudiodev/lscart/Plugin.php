@@ -46,15 +46,15 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            'settings' => [
-                'label'       => 'Beállítások',
-                'description' => 'A webshop alapértelmezett és egyéb beállításai.',
-                'category'    => 'Webshop',
-                'icon'        => 'icon-cog',
-                'class'       => 'LivestudioDev\Lscart\Models\Settings',
-                'order'       => 0,
-                'keywords'    => 'default options currency measure vatkey'
-            ],
+            // 'settings' => [
+            //     'label'       => 'Beállítások',
+            //     'description' => 'A webshop alapértelmezett és egyéb beállításai.',
+            //     'category'    => 'Webshop',
+            //     'icon'        => 'icon-cog',
+            //     'class'       => 'LivestudioDev\Lscart\Models\Settings',
+            //     'order'       => 0,
+            //     'keywords'    => 'default options currency measure vatkey'
+            // ],
             // 'measure' => [
             //     'label'       => 'Mértékegységek',
             //     'description' => 'Hozzon létre, módosítson vagy töröljön mértékegységeket.',

@@ -5,6 +5,7 @@ tabs:
             nameFrom: name
             descriptionFrom: description
             span: auto
+            hidden: 1
             type: relation
             tab: Alapértelmezett
         vatkey:
@@ -12,6 +13,7 @@ tabs:
             nameFrom: value
             descriptionFrom: description
             span: auto
+            hidden: 1
             type: relation
             comment: '%-ban'
             tab: Alapértelmezett
@@ -20,10 +22,13 @@ tabs:
             nameFrom: code
             descriptionFrom: description
             span: auto
+            hidden: 1
+            required: 0
             type: relation
             tab: Alapértelmezett
         useStock:
             label: 'Raktárhasználat engedélyezése'
             span: auto
+            hidden: 1
             type: switch
             tab: Alapértelmezett
