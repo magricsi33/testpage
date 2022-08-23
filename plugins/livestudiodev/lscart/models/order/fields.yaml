@@ -24,6 +24,11 @@ fields:
         label: 'Megrendelő neve'
         span: auto
         type: text
+    delivery_date:
+        label: 'A rendelést erre a napra szeretném kérni:'
+        mode: date
+        span: auto
+        type: datepicker
     'infos[note]':
         label: Megjegyzés
         size: tiny

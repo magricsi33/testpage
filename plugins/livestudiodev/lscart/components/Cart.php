@@ -338,16 +338,12 @@ class Cart extends ComponentBase
 		$order->billing_address = $b_address;
 		$order->email = post('email');
 		$order->name = post('bill_name');
+		$order->delivery_date = post('delivery_date');
 
 		$infos = [];
 		$infos["shipping_mode"] = post('shipping_mode');
 		$infos["payment_mode"] = post('payment_mode');
-		if (post('note')) {
-			$infos["note"] = "A rendelést erre a napra szeretném kérni: " .post('note');
-		} else {
-			$infos["note"] = post('note');
-		}
-		
+		$infos["note"] = post('note');
 
 		$history = [];
 		if ($order->coupon) {
