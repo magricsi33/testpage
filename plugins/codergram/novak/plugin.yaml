@@ -6,7 +6,7 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: Értesítés
+        label: Értesítések
         url: codergram/novak/notifications
         icon: icon-bell
         sideMenu:
