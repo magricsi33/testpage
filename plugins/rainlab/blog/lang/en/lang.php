@@ -6,7 +6,7 @@ return [
         'description' => 'A robust blogging platform.'
     ],
     'blog' => [
-        'menu_label' => 'Blog',
+        'menu_label' => 'Bejegyzések',
         'menu_description' => 'Manage Blog Posts',
         'posts' => 'Posts',
         'create_post' => 'Blog post',

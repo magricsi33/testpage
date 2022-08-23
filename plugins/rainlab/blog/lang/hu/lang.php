@@ -6,7 +6,7 @@ return [
         'description' => 'Teljeskörű blog alkalmazás.'
     ],
     'blog' => [
-        'menu_label' => 'Blog',
+        'menu_label' => 'Hírfolyam',
         'menu_description' => 'Blog bejegyzések kezelése',
         'posts' => 'Bejegyzések',
         'create_post' => 'blog bejegyzés',
