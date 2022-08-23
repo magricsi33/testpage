@@ -58,7 +58,7 @@ orientation = "portrait"
     </li>
 </ul> -->
 <p>
-    <strong>Dátum: {{ order.created_at|date("Y. F d") }}</strong>
+    <strong>Dátum: {{ order.infos.note|slice(41, 100)|date("Y. m. d.") }}</strong>
 </p>
 <p>
     Szavatossági idő a kiszállítástól számítva tejszínes sütemények esetén 48 óra, egyéb sütemények esetén 72 óra. 
