@@ -33,7 +33,12 @@ orientation = "portrait"
         <th style="width: 100px; text-align: left;">Nettó Ár</th>
         <th style="width: 100px; text-align: left;">Össz. nettó ár</th>
     </tr>
+
+    {% set fullPrice = 0 %}
     {% for entry in products %}
+
+        {{ fullPrice += entry.product.price * entry.totalQuantity }}
+
         <tr>
             <td style="width: 100px;">{{ entry.product.name }}</td>
             <td style="width: 100px;">{{ entry.totalQuantity }}</td>
@@ -41,6 +46,13 @@ orientation = "portrait"
             <td style="width: 100px;">{{ entry.product.price * entry.totalQuantity }} Ft</td>
         </tr>
     {% endfor %}
+
+    <tr>
+        <td style="width: 100px;">Összesen</td>
+        <td style="width: 100px;"></td>
+        <td style="width: 100px;"></td>
+        <td style="width: 100px;">{{ fullPrice }} Ft</td>
+    </tr>
 </table>
 
 <p>

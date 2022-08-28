@@ -205,6 +205,7 @@ class Orders extends Controller
 
         $orders = Order::whereIn('id',$checked)->get();
         $products = [];
+        $totalPrice = 0;
 
         foreach ($orders as $order) {
             foreach ($order->items as $item) {
@@ -216,12 +217,15 @@ class Orders extends Controller
                         'totalQuantity' => $item->quantity
                     ];
                 }
+                $totalPrice += $item->product->price;
+                //dd($item->product->price);
             }
         }
 
         $data = [
             'orders' => $orders,
             'products' => $products,
+            'totalPrice' => $totalPrice,
         ];
         return PDF::loadTemplate('livestudiodev.allegro::order_multi', $data)->download('Osszegzett_fuvarlevel.pdf');
     }
