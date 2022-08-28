@@ -30,7 +30,18 @@ class Orders extends Controller
 
     public function pdf($id)
     {
-        $data["order"] = Order::where('id',$id)->first();
+        $orders = Order::where('id',$id)->first();
+        $totalPrice = 0;
+        //dd($orders->items);
+        foreach ($orders->items as $item) {
+            $totalPrice += $item->product->price;
+        }
+
+        $data = [
+            'order' => $orders,
+            'totalPrice' => $totalPrice,
+        ];
+
         return PDF::loadTemplate('livestudiodev.allegro::pdf.order', $data)->download($data["order"]["order_number"].'_'.$data["order"]["name"].'.pdf');
     }
 
