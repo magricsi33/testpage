@@ -1,7 +1,7 @@
 header {
     position: sticky;
     top: 0;
-    z-index: 5000;
+    z-index: 50;
     background-color: #2c3843;
     border-bottom: 1px solid #666;
 }
@@ -10,6 +10,7 @@ header {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    max-width: 90%;
 }
 
 .des {
@@ -50,6 +51,12 @@ table {
 #layout-content {
     min-height: 100vh !important;
     padding: 0 2rem;
+}
+
+@media (max-width:500px) {  
+    #layout-content {
+        padding: 0 .2rem;
+    }
 }
 
 .dropdown-menu  {
@@ -128,9 +135,16 @@ table {
     border-radius: 0 0 10px 10px;
     max-height: 80vh;
     overflow: auto;
-    width: 320px !important;
+    width: 320px;
     right: 0 !important;
     left: auto !important;
+}
+
+@media (max-width: 500px) {
+    .dropdown.notification .dropdown-menu {
+        max-width: 100%;
+        border: 1px solid #666;
+    }      
 }
 
 .dropdown.notification .dropdown-menu::-webkit-scrollbar {
@@ -19824,6 +19838,11 @@ textarea.form-control-lg {
     border-top: 0
 }
 
+#sidebar {
+    z-index: 50000;
+    position: relative;
+}
+
 #sidebar.active .sidebar-wrapper {
     left: 0
 }
@@ -19910,7 +19929,7 @@ textarea.form-control-lg {
 
 .sidebar-wrapper .menu .sidebar-item {
     list-style: none;
-    margin-top: .5rem;
+    margin-top: .6rem;
     position: relative
 }
 

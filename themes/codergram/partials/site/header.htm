@@ -11,6 +11,9 @@
 			<i class="fa-solid fa-circle-user me-2"></i> Profil kitöltése
 		</a>
 	{% endif %}
+	<a class="btn btn-primary d-block d-xl-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+		<i class="fa-solid fa-bars-staggered"></i>
+	</a>
 </div>
 <div class="d-flex align-items-center">
 	<div class="dropdown notification">
@@ -31,7 +34,7 @@
 				{% for notification in notiNews|sort((a, b) => b.created_at <=> a.created_at) %}
 					<form data-request="onSawNoti" data-request-flash>
 						<input type="text" name="noti_id" value="{{ notification.id }}" hidden>
-						<button class="btn px-0 py-0 text-start" type="submit">
+						<button class="btn px-0 py-0 text-start w-100" type="submit">
 							<div class="px-4 text-white card card-body py-3 mb-2">
 								<div class="d-flex align-items-center w-100 justify-content-between">
 									<p class="fw-bold m-0 des">{{ notification.title }}</p>
@@ -79,15 +82,6 @@
 			{% partial 'cart/counter' %}
 		</div>
 	</a>
-	{% if user %}
-	<a href="" onclick="onLogout(event);" class="text-white ms-5">
-		<i class="fa-thin fa-arrow-right-from-bracket"></i>
-	</a>
-	{% else %}
-	<a href="{{ 'belepes'|page }}" class="text-white ms-5 btn btn-primary fw-medium">
-		Belépés
-	</a>
-	{% endif %}
 </div>
 
 {% put scripts %}

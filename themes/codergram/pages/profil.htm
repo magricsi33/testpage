@@ -18,8 +18,8 @@ requirePassword = 0
   <div class="row">
     <div class="col-12">
       <div class="card card-body p-4">
-        <div class="d-flex align-items-center mb-4">
-          <div class="d-flex justify-content-center align-items-center" 
+        <div class="d-flex align-items-center mb-mb-4">
+          <div class="d-none d-md-flex justify-content-center align-items-center" 
           style="width: 45px; height: 45px;">
             <i class="fa-light fa-user fa-2xl prim"></i>
           </div>
@@ -28,7 +28,7 @@ requirePassword = 0
             <p class="text-secondary m-0">Profilhoz tartozó belépési adatok.</p>
           </div>
         </div>
-    
+        <hr class="btn-primary my-3 d-md-none">
         <div class="row px-lg-4">
           <div class="col-lg-4 mb-3">
             <p class="text-white h6 fw-bold m-0">
@@ -59,17 +59,17 @@ requirePassword = 0
     </div>
     <div class="col-lg-6">
       <div class="card card-body p-4">
-        <div class="d-flex align-items-center mb-4">
-          <div class="d-flex justify-content-center align-items-center" 
+        <div class="d-flex align-items-center mb-md-4">
+          <div class="d-none d-md-flex justify-content-center align-items-center" 
           style="width: 45px; height: 45px;">
             <i class="fa-light fa-user fa-2xl prim"></i>
           </div>
-          <div class="ms-2">
+          <div class="ms-md-2">
             <h2 class="h3 m-0">Számlázási adatok</h2>
             <p class="text-secondary m-0">Profilhoz tartozó számlázási adatok.</p>
           </div>
         </div>
-    
+        <hr class="btn-primary my-3 d-md-none">
         <div class="row">
           <div class="mb-3 col-lg-6">
             <p class="text-white h6 fw-bold m-0">
@@ -135,17 +135,17 @@ requirePassword = 0
         <div class="d-flex align-items-center flex-wrap mb-4">
 
           <div class="d-flex align-items-center col-lg-8">
-            <div class="d-flex justify-content-center align-items-center" 
+            <div class="d-none d-md-flex justify-content-center align-items-center" 
             style="width: 45px; height: 45px;">
               <i class="fa-light fa-user fa-2xl prim"></i>
             </div>
-            <div class="ms-2">
+            <div class="ms-md-2">
               <h2 class="h3 m-0">Szállítási adatok</h2>
               <p class="text-secondary m-0">Profilhoz tartozó szállítási adatok.</p>
             </div>
           </div>
-
-          <form data-request="onUpdateTransData" data-request-flash class="col-lg-4 text-end">
+          <hr class="btn-primary my-3 d-md-none">
+          <form data-request="onUpdateTransData" data-request-flash class="col-lg-4 text-end mt-4 mt-md-0">
             <input type="text" name="trans_name" placeholder="Teljes név" value="{{ user.billing_name }}" hidden>
             <input type="text" name="trans_zip" placeholder="Irányítószám" value="{{ user.billing_zip }}" hidden>
             <input type="text" name="trans_city" placeholder="Város" value="{{ user.billing_city }}" hidden>

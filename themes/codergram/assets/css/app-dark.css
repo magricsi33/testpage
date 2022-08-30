@@ -6546,7 +6546,7 @@ body.theme-dark .spinner-grow-sm {
 
 body.theme-dark .offcanvas {
     background-clip: padding-box;
-    background-color: #fff;
+    background-color: var(--bs-body-bg);
     bottom: 0;
     display: flex;
     flex-direction: column;
@@ -6612,7 +6612,7 @@ body.theme-dark .offcanvas-start {
     left: 0;
     top: 0;
     transform: translateX(-100%);
-    width: 400px
+    width: 300px
 }
 
 body.theme-dark .offcanvas-end {

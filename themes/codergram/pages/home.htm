@@ -30,7 +30,7 @@ use RainLab\User\Facades\Auth;
 <!-- <div class="page-heading">
     <h1 class="h3">Hírfolyam</h1>
 </div> -->
-<div class="page-content">
+<div class="page-content px-3">
     <section class="row">
     
     {% set posts = blogPosts.posts %}
@@ -78,8 +78,6 @@ use RainLab\User\Facades\Auth;
             <h2 class="h3 mb-4">Értesítések</h2>
 
             <h6 class="h6 mb-4">Új értesítés</h6>
-
-
 
             {% if notiNews|length > 0 %}
                 {% for notification in notiNews|sort((a, b) => b.created_at <=> a.created_at) %}
