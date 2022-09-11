@@ -46,42 +46,42 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            // 'settings' => [
-            //     'label'       => 'Beállítások',
-            //     'description' => 'A webshop alapértelmezett és egyéb beállításai.',
-            //     'category'    => 'Webshop',
-            //     'icon'        => 'icon-cog',
-            //     'class'       => 'LivestudioDev\Lscart\Models\Settings',
-            //     'order'       => 0,
-            //     'keywords'    => 'default options currency measure vatkey'
-            // ],
-            // 'measure' => [
-            //     'label'       => 'Mértékegységek',
-            //     'description' => 'Hozzon létre, módosítson vagy töröljön mértékegységeket.',
-            //     'category'    => 'Webshop',
-            //     'icon'        => 'icon-university',
-            //     'url'         => \Backend::url('livestudiodev/lscart/measures'),
-            //     'order'       => 0,
-            //     'keywords'    => 'measures'
-            // ],
-            // 'currency' => [
-            //     'label'       => 'Pénznemek',
-            //     'description' => 'Hozzon létre, módosítson vagy töröljön pénznemeket.',
-            //     'category'    => 'Webshop',
-            //     'icon'        => 'icon-dollar',
-            //     'url'         => \Backend::url('livestudiodev/lscart/currencies'),
-            //     'order'       => 0,
-            //     'keywords'    => 'currency'
-            // ],
-            // 'vatkeys' => [
-            //     'label'       => 'Adókulcsok',
-            //     'description' => 'Hozzon létre, módosítson vagy töröljön adókulcsokat.',
-            //     'category'    => 'Webshop',
-            //     'icon'        => 'icon-key',
-            //     'url'         => \Backend::url('livestudiodev/lscart/vatkeys'),
-            //     'order'       => 0,
-            //     'keywords'    => 'vatkeys vat'
-            // ],
+            'settings' => [
+                'label'       => 'Beállítások',
+                'description' => 'A webshop alapértelmezett és egyéb beállításai.',
+                'category'    => 'Webshop',
+                'icon'        => 'icon-cog',
+                'class'       => 'LivestudioDev\Lscart\Models\Settings',
+                'order'       => 0,
+                'keywords'    => 'default options currency measure vatkey'
+            ],
+            'measure' => [
+                'label'       => 'Mértékegységek',
+                'description' => 'Hozzon létre, módosítson vagy töröljön mértékegységeket.',
+                'category'    => 'Webshop',
+                'icon'        => 'icon-university',
+                'url'         => \Backend::url('livestudiodev/lscart/measures'),
+                'order'       => 0,
+                'keywords'    => 'measures'
+            ],
+            'currency' => [
+                'label'       => 'Pénznemek',
+                'description' => 'Hozzon létre, módosítson vagy töröljön pénznemeket.',
+                'category'    => 'Webshop',
+                'icon'        => 'icon-dollar',
+                'url'         => \Backend::url('livestudiodev/lscart/currencies'),
+                'order'       => 0,
+                'keywords'    => 'currency'
+            ],
+            'vatkeys' => [
+                'label'       => 'Adókulcsok',
+                'description' => 'Hozzon létre, módosítson vagy töröljön adókulcsokat.',
+                'category'    => 'Webshop',
+                'icon'        => 'icon-key',
+                'url'         => \Backend::url('livestudiodev/lscart/vatkeys'),
+                'order'       => 0,
+                'keywords'    => 'vatkeys vat'
+            ],
         ];
     }
 
