@@ -49,15 +49,15 @@ class Priceable extends \October\Rain\Extension\ExtensionBase
         $userdc = Auth::user() ? Auth::user()->discounts : null;
 
         $price = 0;
-        if($coupon && $model->coupon){
-            foreach ($items as $item) {
-                $price += ($item->product->getItemPrice($item->variant_id,1,$discount, $model->coupon, $userdc) * $item->quantity);
-            }
-        }else {
-            foreach ($items as $item) {
-                $price += ($item->product->getItemPrice($item->variant_id,1,$discount, null, $userdc) * $item->quantity);
-            }
-        }
+        // if($coupon && $model->coupon){
+        //     foreach ($items as $item) {
+        //         $price += ($item->product->getItemPrice($item->variant_id,1,$discount, $model->coupon, $userdc) * $item->quantity);
+        //     }
+        // }else {
+        //     foreach ($items as $item) {
+        //         $price += ($item->product->getItemPrice($item->variant_id,1,$discount, null, $userdc) * $item->quantity);
+        //     }
+        // }
         
         $value = $price < 0 ? 0 : $price;
 

@@ -89,6 +89,7 @@ tabs:
             descriptionFrom: description
             span: auto
             readOnly: 0
+            hidden: 0
             type: relation
             commentAbove: 'Termék adókulcsa'
             tab: Egyéb
