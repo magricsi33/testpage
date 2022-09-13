@@ -339,6 +339,7 @@ class Cart extends ComponentBase
 		$order->email = post('email');
 		$order->name = post('bill_name');
 		$order->delivery_date = post('delivery_date');
+		$order->invoice = post('invoice');
 
 		$infos = [];
 		$infos["shipping_mode"] = post('shipping_mode');

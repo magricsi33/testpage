@@ -10,6 +10,7 @@ class BuilderTableUpdateLivestudiodevLscartOrders4 extends Migration
         Schema::table('livestudiodev_lscart_orders', function($table)
         {
             $table->date('delivery_date')->nullable();
+            $table->boolean('invoice')->nullable();
         });
     }
     
@@ -18,6 +19,7 @@ class BuilderTableUpdateLivestudiodevLscartOrders4 extends Migration
         Schema::table('livestudiodev_lscart_orders', function($table)
         {
             $table->dropColumn('delivery_date');
+            $table->dropColumn('invoice');
         });
     }
 }

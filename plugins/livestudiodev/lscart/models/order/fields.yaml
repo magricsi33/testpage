@@ -29,6 +29,10 @@ fields:
         mode: date
         span: auto
         type: datepicker
+    invoice:
+        label: 'Számlát kérek'
+        span: auto
+        type: switch
     'infos[note]':
         label: Megjegyzés
         size: tiny
