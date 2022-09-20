@@ -33,8 +33,9 @@ class Orders extends Controller
         $orders = Order::where('id',$id)->first();
         $totalPrice = 0;
         //dd($orders->items);
+
         foreach ($orders->items as $item) {
-            $totalPrice += $item->product->price;
+            $totalPrice += $item->product->price * $item->quantity;
         }
 
         $data = [
