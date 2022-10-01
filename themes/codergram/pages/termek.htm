@@ -140,7 +140,15 @@ function onSendOffer()
                             <div class="col-4 float-right text-right">
                                 {% if product.price_brutto > 0 %}
                                 <div class="form-group">
-                                    <input type="number" id="quantity" name="quantity" class="form-control w-100 d-inline-block" value="1" placeholder="1" min="1">
+                                    <p class="fw-bold prop-title text-secondary mb-1">Mennyiség</p>
+                                    <div class="position-relative ">
+                                        <input type="number" id="quantity" name="quantity"
+                                        class="d-flex flex-row justify-content-between align-items-center card card-body text-white w-100" 
+                                        value="1" placeholder="1" min="1">
+                                        <div class="inputTag px-2">
+                                            {{ product.unit.name }}
+                                        </div>
+                                    </div>
                                     <!-- <select name="quantity" id="quantity" class="form-control w-auto d-inline-block" id="">
                                         {% for i in 1..10 %}
                                         <option value="{{i}}">{{ i }}</option>
@@ -149,23 +157,36 @@ function onSendOffer()
                                 </div>
                                 {% endif %}
                             </div>
-
-                            <div class="col-12 mb-4">
-                                {% if product.variants|length > 0 %}
-                                    <label>Változat</label>
-                                    <select name="variant_id" class="form-control variant" id="" data-request="onChangeVariants">
+                            {% if product.variants|length > 0 %}
+                            <div class="col-12 d-flex justify-content-between">
+                                <div class="w-100 px-1">
+                                    <p class="fw-bold prop-title text-secondary mb-1 mt-4">Változat</p>
+                                    <select name="variant_id" 
+                                    class="d-flex flex-row justify-content-between align-items-center card card-body text-white w-100" 
+                                    id="" data-request="onChangeVariants">
                                         {% for variant in product.variants.sortBy('id') %}
                                         <option value="{{ variant.id }}">{{ variant.name }}</option>
                                         {% endfor %}
                                     </select>
-                                {% endif %}
+                                </div>
+                                <div class="w-100 px-1 mt-4" >
+                                    <p class="fw-bold prop-title text-secondary mb-1">Mennyiség</p>
+                                    <div class="position-relative ">
+                                        <input type="number" id="quantity" name="quantity"
+                                        class="d-flex flex-row justify-content-between align-items-center card card-body text-white w-100" 
+                                        value="1" placeholder="1" min="1">
+                                        <div class="inputTag px-2">
+                                            {{ product.unit.name }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
+                            {% endif %}
                             {% endif %}
                             <div class="col-12">
                                 {% if product.getItemPrice > 0 %}
                                     {% if product.status == 1 %}
-                                    <button type="submit" id="addCartBtn" class="px-5 d-inline-block btn btn-primary fw-bold mb-3">
+                                    <button type="submit" id="addCartBtn" class="px-5 py-3 d-inline-block btn btn-primary fw-bold mb-3">
                                         <i class="fas fa-shopping-cart me-2"></i> Kosárba rakom
                                     </button>
                                     {% else %}
@@ -180,11 +201,6 @@ function onSendOffer()
                         </div>
                     </div>
                 </form>
-                <p class="fw-bold prop-title text-secondary mb-1 mt-4">Tulajdonság</p>
-                <div class="d-flex flex-row justify-content-between align-items-center card card-body">
-                    <p class="m-0 text-secondary">Mértékegység:</p>
-                    <p class="m-0 text-secondary">{{ product.unit.name }}</p>
-                </div>
                 {% if product.description %}
                 <p class="fw-bold prop-title text-secondary mt-3 mb-1">Leírás</p>
                 <div class="desc text-secondary card card-body">

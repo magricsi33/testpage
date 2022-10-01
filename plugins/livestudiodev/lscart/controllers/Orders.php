@@ -37,7 +37,7 @@ class Orders extends Controller
         foreach ($orders->items as $item) {
             $totalPrice += $item->product->price * $item->quantity;
         }
-
+        //dd($orders);
         $data = [
             'order' => $orders,
             'totalPrice' => $totalPrice,
@@ -229,7 +229,7 @@ class Orders extends Controller
                         'totalQuantity' => $item->quantity
                     ];
                 }
-                $totalPrice += $item->product->price;
+                $totalPrice += $item->product->price * $item->quantity;
                 //dd($item->product->price);
             }
         }

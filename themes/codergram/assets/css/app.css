@@ -20745,3 +20745,17 @@ a {
 .icon-mid:before {
     vertical-align: middle
 }
+
+.inputTag {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    height: 100%;
+    width: max-content;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    user-select: none;
+}

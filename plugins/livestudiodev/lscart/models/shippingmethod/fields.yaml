@@ -47,7 +47,7 @@ tabs:
             label: 'Árazási szabályok'
             prompt: 'Adjon hozzá szabályokat'
             span: full
-            hidden: 1
+            hidden: 0
             type: repeater
             tab: 'Árazási szabályok'
             form:
@@ -93,7 +93,7 @@ tabs:
         delivery_delay:
             label: 'Várható kiszállítás'
             span: auto
-            hidden: 1
+            hidden: 0
             type: number
             comment: (napokban)
             tab: Egyéb
