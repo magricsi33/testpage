@@ -27,7 +27,7 @@
                     {% else %}
                     <td class="border-0 align-middle">
                         {{ product.getItemPriceNetto(null, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
-                        {{ cart.cart.currency.shortcode }}
+                        {{ cart.cart.currency.shortcode }} / {{ product.unit.name }}
                     </td>
                     {% endif %}
                     <td class="border-0 align-middle">
@@ -92,12 +92,12 @@
                 </tr>
                 {% endif %}
 
-                <tr>
+                <!-- <tr>
                     <td class="font-weight-bold border-0">Szállítási díj:</td>
                     <td class="border-0 text-end">{{ cart.ShippingCost(cart.cart)|number_format(0, ',', ' ') }}
                         {{ cart.cart.currency.shortcode }}
                     </td>
-                </tr>
+                </tr> -->
               
                 <tr>
                     <td class="font-weight-bold">
