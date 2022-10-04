@@ -1,5 +1,6 @@
 <div class="d-flex align-items-center">
 	{% if profilPercentage != 100 %}
+	<div class="d-xl-flex d-none align-items-center">
 		<p class="fw-bold m-0 text-white me-3">Profil állapota</p>
 		<div class="status des me-3" role="progressbar" 
 		style="
@@ -10,6 +11,7 @@
 		<a href="{{ 'profil'|page }}" class="btn btn-primary fw-bold des">
 			<i class="fa-solid fa-circle-user me-2"></i> Profil kitöltése
 		</a>
+	</div>
 	{% endif %}
 	<a class="btn btn-primary d-block d-xl-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
 		<i class="fa-solid fa-bars-staggered"></i>

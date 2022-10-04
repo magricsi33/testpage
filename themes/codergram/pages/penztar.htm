@@ -69,6 +69,21 @@ function onStart() {
 
 <div class="section position-relative" id="checkout-page">
     <div class="container pb-5">
+        <div class="page-content px-3">
+            {% if profilPercentage != 100 %}
+            <div class="d-xl-none d-flex align-items-center justify-content-between mb-4 w-100">
+                <p class="fw-bold m-0 text-white me-3">Profil állapota</p>
+                <div class="status des me-3" role="progressbar" 
+                style="
+                --value: {{ profilPercentage|number_format(0, '', '') }};
+                --size: 2.5rem;
+                ">
+                </div>
+            </div>
+            <a href="{{ 'profil'|page }}" class="btn btn-primary fw-bold des w-100 d-xl-none">
+                <i class="fa-solid fa-circle-user me-2"></i> Profil kitöltése
+            </a>
+            {% endif %}
         <div class="row">
             <div class="col-12">
                 <h1 class="mt-5 fw-bold color-dark">Pénztár</h1>

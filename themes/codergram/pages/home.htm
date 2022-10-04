@@ -27,17 +27,28 @@ use RainLab\User\Facades\Auth;
 ==
 
 
-<!-- <div class="page-heading">
-    <h1 class="h3">Hírfolyam</h1>
-</div> -->
 <div class="page-content px-3">
+    {% if profilPercentage != 100 %}
+	<div class="d-xl-none d-flex align-items-center mb-4">
+		<p class="fw-bold m-0 text-white me-3">Profil állapota</p>
+		<div class="status des me-3" role="progressbar" 
+		style="
+		--value: {{ profilPercentage|number_format(0, '', '') }};
+		--size: 2.5rem;
+		">
+		</div>
+		<a href="{{ 'profil'|page }}" class="btn btn-primary fw-bold des">
+			<i class="fa-solid fa-circle-user me-2"></i> Profil kitöltése
+		</a>
+	</div>
+	{% endif %}
     <section class="row">
     
     {% set posts = blogPosts.posts %}
     
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <h2 class="h3 mb-4">Hírfolyam</h2>
+            <h1 class="h3 mb-4">Hírfolyam</h1>
             <!-- Post box -->
             {% for post in posts if "now"|date('Y. m. d. H:i', 'Europe/Budapest') > post.published_at|date("Y. m. d. H:i") %}
             <div class="card card-boy p-0 text-white">
