@@ -12,13 +12,7 @@
                 {% for item in cart.cart.items %}
                 {% set product = item.product %}
                 <tr class="mb-3">
-                    <td class="border-0 align-middle">
-                        <a href="{{ 'termek'|page({slug: product.slug}) }}" target="_blank" class="tt"
-                            title="{{ product.name }}">
-                            <img src="{{ product.image.path|resize(500, false, {mode: 'crop'}) }}" width="50" height="50" class="of-cover" alt="" />
-                        </a>
-                    </td>
-                    <td class="border-0 align-middle">{{ item.quantity }} db</td>
+                    <td class="border-0 align-middle">{{ item.quantity }} {{ product.unit.name }}</td>
                     {% if product.variants|length > 0 %}
                     <td class="border-0 align-middle">
                         {{ product.getItemPriceNetto(item.variant_id, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
@@ -27,7 +21,7 @@
                     {% else %}
                     <td class="border-0 align-middle">
                         {{ product.getItemPriceNetto(null, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
-                        {{ cart.cart.currency.shortcode }} / {{ product.unit.name }}
+                        {{ cart.cart.currency.shortcode }}
                     </td>
                     {% endif %}
                     <td class="border-0 align-middle">
