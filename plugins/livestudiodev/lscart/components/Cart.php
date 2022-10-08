@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Cms\Classes\ComponentBase;
 use Exception;
 use Event;
+use Mail;
 
 class Cart extends ComponentBase
 {
@@ -382,6 +383,12 @@ class Cart extends ComponentBase
 				"name" => $order->name,
 				"order" => $order
 			];
+		
+			Mail::send('novakcuki::mail.order', $vars, function ($message) use ($email) {
+				$message->to($email);
+				$message->to("novakcuki2022@gmail.com");
+				$message->subject('Megrendelés visszaigazolása');
+			});
 
 			\Flash::success("Rendelését megkaptuk, köszönjük!");
 		} else {

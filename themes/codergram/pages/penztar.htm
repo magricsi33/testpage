@@ -2,7 +2,7 @@ title = "Pénztár"
 url = "/penztar"
 layout = "default"
 meta_title = "Pénztár oldal"
-meta_description = "Pénztár oldal a Bakonyi Hűtő- és Klímatechnika Kft. weboldalán a bakonyiklima.hu oldalon. Hűtéstechnika 1995 óta országszerte garanciával."
+meta_description = "Pénztár oldal"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
@@ -31,6 +31,18 @@ function onStart() {
     $this['conjuncture'] = json_encode($out);
 
 }
+
+function onSendMessage() {
+    $email = post('email');
+    $vars = \Input::all();
+
+    Mail::send('novakcuki::mail.order', $vars, function ($message) use ($email) {
+        $message->to($email);
+        $message->to("kapcsolat@codergram.hu");
+        $message->subject('Megrendelés visszaigazolása');
+    });
+}
+
 ?>
 ==
 <div class="text-white">
@@ -150,6 +162,72 @@ function onStart() {
                 </form>
             </div>
         </div>
+
+
+
+
+
+<h2 style="font-size:20px; font-weight: bold">Számlázási adatok</h2>   
+<ul>
+    <li>Számlázási név: {{ order.name }}</li>
+    <li>Email: {{ order.email }}</li>
+    <li>Telefon: {{ order.billing_address.phone }}</li>
+
+    <li>Irányítószám: {{ order.address.postcode }}</li>
+    <li>Település: {{ order.address.city }}</li>
+    <li>Közterület megnevezése: {{ order.address.address_name }}</li>
+    <li>Közterület jellege: {{ order.address.address_type }}</li>
+    <li>Házszám: {{ order.address.flat_number }}</li>
+    <li>Emelet: {{ order.address.floor }}</li>
+    <li>Ajtó: {{ order.address.door_num }}</li>
+
+    <li>Adószám: {{ order.tax_number }}</li>
+</ul>
+ 
+<p>
+    {{ ship_bill_equal ? 'A szállítási adatok megegyeznek a számlázási adatokkal.' }}   
+</p>
+
+<h2 style="font-size:20px; font-weight: bold">Szállítási adatok</h2>  
+<ul>
+    <li>Név: {{ order.name }}</li>
+    <li>Irányítószám: {{ order.billing_address.postcode }}</li>
+    <li>Település: {{ order.billing_address.city }}</li>
+    <li>Közterület megnevezése: {{ order.billing_address.address_name }}</li>
+    <li>Közterület jellege: {{ order.billing_address.address_type }}</li>
+    <li>Házszám: {{ order.billing_address.flat_number }}</li>
+    <li>Emelet: {{ order.billing_address.floor }}</li>
+    <li>Ajtó: {{ order.billing_address.door_num }}</li>
+    <li>Szállítási mód: {{ order.shipping.name }}</li>
+    <li>Fizetési mód: {{ order.paymentMode }}</li>
+</ul>
+
+<h2 style="font-size:20px; font-weight: bold">Rendelési adatok</h2>   
+<ul>
+    <li>Rendelés kiszállítasának napja: {{ order.delivery_date }}</li>
+    <li>Megjegyzés: {{ order.note }}</li>
+</ul>
+
+<ul>
+    <li>Összeg: {{ order.absolutePrice }} Ft</li>
+</ul>
+
+<h2 style="font-size:20px; font-weight: bold">Termékek</h2>  
+
+<div style="width: 100%; padding-left: 10px; padding-right: 10px; display: flex; align-items: center;">
+    <div style="width: 30%;">Név</div>
+    <div style="width: 30%;">Mennyiség</div>
+    <div style="width: 30%;">Összeg</div>
+</div>
+{% for item in order.items %}
+    <div style="width: 100%; border:1px solid #666; padding: 10px; display: flex; align-items: center;">
+        <div style="width: 30%;">{{ item.product.name }}</div>
+        <div style="width: 30%;">{{ item.quantity }}</div>
+        <div style="width: 30%;">{{ item.product.price }} Ft</div>
+    </div>
+{% endfor %}
+
+
         {% else %}
         <div class="row">
             <div class="col-12">
@@ -216,7 +294,7 @@ function onStart() {
 
         $(el).request("onCheckout", {
             success: (data) => {
-                $.oc.flashMsg({
+                $.wn.flashMsg({
                     interval: 2,
                     class: 'success',
                     text: 'Rendelését megkaptuk, köszönjük!'
@@ -226,8 +304,9 @@ function onStart() {
                     location.href = `fizetes/${data.id}`;
                 }, 500);
             },
+
             error: () => {
-                $.oc.flashMsg({
+                $.wn.flashMsg({
                     interval: 2,
                     class: 'error',
                     text: 'Hiba történt a rendelés leadása közben!'
