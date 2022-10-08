@@ -12,7 +12,10 @@
                 {% for item in cart.cart.items %}
                 {% set product = item.product %}
                 <tr class="mb-3">
-                    <td class="border-0 align-middle">{{ item.quantity }} {{ product.unit.name }}</td>
+                    <td class="border-0 align-middle">
+                        {{ item.quantity - item.quantity|number_format(0, ',', ' ') == 0 ? item.quantity|number_format(0, ',', ' ') : item.quantity|number_format(2, ',', ' ') }} 
+                        {{ product.unit.name }}
+                    </td>
                     {% if product.variants|length > 0 %}
                     <td class="border-0 align-middle">
                         {{ product.getItemPriceNetto(item.variant_id, null, true, false, user ? user.discounts : null)|number_format(0, ',', ' ') }}
