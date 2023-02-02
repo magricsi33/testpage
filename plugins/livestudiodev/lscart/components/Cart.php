@@ -386,7 +386,7 @@ class Cart extends ComponentBase
 		
 			Mail::send('novakcuki::mail.order', $vars, function ($message) use ($email) {
 				$message->to($email);
-				//$message->to("novakcuki2022@gmail.com");
+				$message->to("novakcuki2022@gmail.com");
 				$message->subject('Megrendelés visszaigazolása');
 			});
 
