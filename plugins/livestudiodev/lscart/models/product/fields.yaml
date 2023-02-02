@@ -96,13 +96,13 @@ tabs:
         variantonly:
             label: 'Csak a variánsok használata'
             span: auto
-            hidden: 1
+            hidden: 0
             type: switch
             comment: 'Ebben az esetben az alap termék csak egy minta, és csak a variánsok használatával tehető kosárba az adott termék'
             tab: 'Változatok / Variánsok'
         variants:
             span: full
             path: $/livestudiodev/lscart/controllers/products/variants_relation.htm
-            hidden: 1
+            hidden: 0
             type: partial
             tab: 'Változatok / Variánsok'

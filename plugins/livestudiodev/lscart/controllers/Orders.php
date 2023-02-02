@@ -35,7 +35,13 @@ class Orders extends Controller
         //dd($orders->items);
 
         foreach ($orders->items as $item) {
-            $totalPrice += $item->product->price * $item->quantity;
+            if ($item->variant) {
+                $totalPrice += ($item->product->price + $item->variant->pricediff) * $item->quantity;
+            } else {
+                $totalPrice += $item->product->price * $item->quantity;
+            }
+            
+
         }
         //dd($orders);
         $data = [

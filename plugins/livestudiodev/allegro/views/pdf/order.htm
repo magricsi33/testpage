@@ -36,7 +36,7 @@ orientation = "portrait"
     {% set product = item.product %}
         <tr>
             <td style="width: 100px;">{{ product.name }}</td>
-            <td style="width: 100px;">{{ item.quantity }}</td>
+            <td style="width: 100px;">{{ item.variant.name }}</td>
             <td style="width: 100px;">{{ product.price }} Ft</td>
             <td style="width: 100px;">{{ product.price * item.quantity }} Ft</td>
         </tr>

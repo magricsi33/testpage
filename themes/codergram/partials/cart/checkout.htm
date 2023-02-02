@@ -13,8 +13,15 @@
                 {% set product = item.product %}
                 <tr class="mb-3">
                     <td class="border-0 align-middle">
-                        {{ item.quantity - item.quantity|number_format(0, ',', ' ') == 0 ? item.quantity|number_format(0, ',', ' ') : item.quantity|number_format(2, ',', ' ') }} 
-                        {{ product.unit.name }}
+                        {{ item.product.name }}
+                        {% if product.variants|length > 0 %}
+                        <p class="text-sm">
+                            {{ item.quantity - item.quantity|number_format(0, ',', ' ') == 0 ? item.quantity|number_format(0, ',', ' ') : item.quantity|number_format(2, ',', ' ') }} 
+                            {{ product.unit.name }}
+                            |
+                            {{ item.variant.name }}
+                        </p>
+                        {% endif %}
                     </td>
                     {% if product.variants|length > 0 %}
                     <td class="border-0 align-middle">
