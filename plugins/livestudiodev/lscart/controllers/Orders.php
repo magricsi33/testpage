@@ -228,8 +228,10 @@ class Orders extends Controller
         foreach ($orders as $order) {
             foreach ($order->items as $item) {
 
-                if(isset($products[$item->product_id.'_'.$item->variant_id])) {
+                if (isset($products[$item->product_id.'_'.$item->variant_id])) {
                     $products[$item->product_id.'_'.$item->variant_id]["totalQuantity"] += $item->quantity;
+                } elseif (isset($products[$item->product_id.'_0'])) {
+                    $products[$item->product_id.'_0']["totalQuantity"] += $item->quantity;
                 } else {
                     if ($item->variant_id) {
                         $products[$item->product_id.'_'.$item->variant_id] = [
@@ -254,6 +256,8 @@ class Orders extends Controller
                 } else {
                     $totalPrice += $item->product->price * $item->quantity;
                 }
+
+              
 
                 //dd($item->product->price);
             }
